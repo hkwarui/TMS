@@ -1,7 +1,6 @@
 <?php
-include_once "db_config.php";
-include_once "functions.php";
- ?>
+include_once "login.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,8 +10,7 @@ include_once "functions.php";
     <title>TMS | Log in </title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:301,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:301,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- icheck bootstrap -->
@@ -31,17 +29,17 @@ include_once "functions.php";
             </div>
             <div class="card-body">
                 <!-- notification message -->
-                <?php  if  (count($errors) > 0) { ?>
-                <div class="alert alert-danger">
-                    <?php foreach ($errors as $error) { ?>
-                    <p><?php echo $error ?></p>
-                    <?php } ?>
-                </div>
-                <?php  } ?>
+                <?php
+                if (isset($msg)) {
+                    echo $msg;
+                    unset($msg);
+                    header("refresh:5");
+                }
+                ?>
 
                 <form method="post">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="username" placeholder="Username">
+                        <input type="text" class="form-control" name="username" placeholder="Username" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -49,7 +47,7 @@ include_once "functions.php";
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="password" placeholder="Password">
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
