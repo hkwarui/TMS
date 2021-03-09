@@ -1,3 +1,7 @@
+<?php
+include_once "db_config.php";
+include_once "functions.php";
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,22 +30,18 @@
                 </a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
                 <!-- notification message -->
-                <?php if (isset($_SESSION['success'])) : ?>
-                <div class="error success">
-                    <h3>
-                        <?php 
-						echo $_SESSION['success']; 
-						unset($_SESSION['success']);
-					?>
-                    </h3>
+                <?php  if  (count($errors) > 0) { ?>
+                <div class="alert alert-danger">
+                    <?php foreach ($errors as $error) { ?>
+                    <p><?php echo $error ?></p>
+                    <?php } ?>
                 </div>
-                <?php endif ?>
+                <?php  } ?>
 
-                <form action="index3.html" method="post">
+                <form method="post">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Username">
+                        <input type="text" class="form-control" name="username" placeholder="Username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" class="form-control" name="password" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -61,7 +61,7 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" name="login_user" class="btn btn-primary btn-block">Sign In</button>
                         </div>
                         <!-- /.col -->
                     </div>
