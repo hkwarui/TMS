@@ -26,8 +26,11 @@ require_once "auth.php";
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a href="../logout.php"><i style="color:red" class="nav-icon fas fa-power-off"></i></a>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="" class="nav-link"> <i class="nav-icon fas fa-user"></i> <span><?php echo ucfirst($username); ?></span></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="../logout.php" class="nav-link" title="Logout"><i style=" color:red" class="nav-icon fas fa-power-off"></i></a>
                 </li>
             </ul>
         </nav>

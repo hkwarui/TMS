@@ -8,7 +8,7 @@ require_once "auth.php";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TMS </title>
+    <title>TMS</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
@@ -25,9 +25,13 @@ require_once "auth.php";
             </ul>
 
             <!-- Right navbar links -->
+
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a href="../logout.php"><i style="color:red" class="nav-icon fas fa-power-off"></i></a>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="" class="nav-link"> <i class="nav-icon fas fa-user"></i> <span><?php echo ucfirst($username); ?></span></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="../logout.php" class="nav-link" title="Logout"><i style=" color:red" class="nav-icon fas fa-power-off"></i></a>
                 </li>
             </ul>
         </nav>
