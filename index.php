@@ -1,80 +1,94 @@
-<?php
-include_once "login.php";
+<?php 
+include_once("login.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-7">
-    <meta name="viewport" content="width=device-width, initial-scale=2">
-    <title>TMS | Log in </title>
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:301,400,400i,700&display=fallback">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+    <meta name="author" content="AdminKit">
+    <meta name="keywords" content="Tangla, Gardens, Farm, admin, Poulty, Farming, Transport, greenhouse ">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="static/fontawesome-free/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="static/img/icons/favicon.png" />
+    <title>TMS - Sign In</title>
+    <link href="static/css/app.css" rel="stylesheet">
+    <!--boostrap 5 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
-<body class="hold-transition login-page">
-    <div class="login-box">
-        <!-- /.login-logo -->
-        <div class="card card-outline card-primary">
-            <div class="card-header text-center">
-                <a href="index3.html" class="h1"><b>TMS</b>
-                </a>
-            </div>
-            <div class="card-body">
-                <!-- notification message -->
-                <?php
+<body>
+    <main class="d-flex w-100">
+        <div class="container d-flex flex-column">
+            <div class="row vh-100">
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto d-table h-100">
+                    <div class="d-table-cell">
+
+                        <div class="text-center mt-4">
+                            <h1 class="display-6 mt-6 mb-4" style="color:#3275c7;"><b> Training<small>&reg;</small>
+                                    Managment </b>
+                            </h1>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="m-sm-4">
+                                    <form method="post">
+                                        <div class="mb-2">
+                                            <?php
                 if (isset($msg)) {
                     echo $msg;
                     unset($msg);
                     header("refresh:5");
                 }
                 ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label"><b>Username</b></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text bg-primary">
+                                                    <span class="fas fa-user" style="color:white"></span>
+                                                </div>
+                                                <input class="form-control form-control-lg" type="text" id="username"
+                                                    name="username" required>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label"><b>Password</b></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text bg-primary">
+                                                    <span class="fas fa-lock" style="color:white"></span>
+                                                </div>
+                                                <input class="form-control form-control-lg" type="password"
+                                                    id="password" name="password" required>
+                                            </div>
+                                            <small>
+                                                <a href="pages-reset-password.html">Forgot password?</a>
+                                            </small>
+                                        </div>
 
-                <form method="post">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="username" placeholder="Username" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
+                                        <div class="text-center mt-2">
+                                            <!-- <a href="index.html" class="btn btn-lg btn-primary">Sign in</a> -->
+                                            <button type="submit" name="login_user" class="btn btn-lg btn-primary">Sign
+                                                in</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
+
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="password" placeholder="Password" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" name="login_user" class="btn btn-primary btn-block">Sign In</button>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                </form>
+                </div>
             </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
-    </div>
-    <!-- /.login-box -->
+    </main>
 
-    <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="dist/js/adminlte.min.js"></script>
+    <script src="static/js/app.js"></script>
+
 </body>
 
 </html>

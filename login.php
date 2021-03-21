@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 require_once "db_config.php";
@@ -27,7 +26,7 @@ if (isset($_POST['login_user'])) {
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['user_type'] = $row['user_type'];
                 $_SESSION['login_status'] = $row['login_status'];
-                $_SESSION['msg'] = "<div class='alert alert-success p-1'>You are logged in as " . ucfirst($_SESSION['username']) . "</div>";
+                $_SESSION['msg'] = "<div class='alert alert-success p-3'>You are logged in as " . ucfirst($_SESSION['username']) . "</div>";
 
                 header("Location: admin");
                 exit;
@@ -36,17 +35,17 @@ if (isset($_POST['login_user'])) {
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['user_type'] = $row['user_type'];
                 $_SESSION['login_status'] = $row['login_status'];
-                $_SESSION['msg'] = "<div class='alert alert-success p-1'>You are logged in as " . ucfirst($_SESSION['username']) . "</div>";
+                $_SESSION['msg'] = "<div class='alert alert-success p-3'>You are logged in as " . ucfirst($_SESSION['username']) . "</div>";
 
                 header("Location: user");
                 exit;
             }
         }
         if ($row['login_status'] == 2) {
-            $msg = "<div class='alert alert-danger'>Account is deactivated. Contact Admin</div>";
+            $msg = "<div class='alert alert-danger p-3'>Account is deactivated. Contact Admin</div>";
         }
     } else {
-        $msg = "<div class='alert alert-danger'>Incorrect Username or Password.</div>";
+        $msg = "<div class='alert alert-danger p-3'>Incorrect Username or Password.</div>";
     }
 }
 ?>
