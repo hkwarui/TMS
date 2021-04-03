@@ -1,23 +1,27 @@
 <?php
-session_start();
-include_once('../includes/header.php')
- ?>
+require_once "auth.php";
+include_once('../includes/header.php');
 
+//DISPLAY A MESSAGE IF ANY 
+if (isset($_SESSION['msg'])) {
+    echo '<div class="alert alert-success ml-5 p-1">';
+    echo $_SESSION['msg'];
+    unset($_SESSION['msg']);
+    echo "</div>";
+} ?>
+
+<script>
+    // HIDE MESSAGE AFTER 4 SECS
+    $(function() {
+        setTimeout(function() {
+            $(".alert").hide('slow');
+        }, 4000);
+    });
+</script>
 
 <main class="content">
-    <?php if(isset($_SESSION['msg'])){ ?>
-    <div class="alert alert-success">
-        <?php  echo $_SESSION['msg'];
-            unset($_SESSION['msg']);
-            header('refresh:3');
-            ?>
-
-    </div>
-    <?php } ?>
     <div class="container-fluid p-0">
-
         <h1 class="h3 mb-3">Blank Page</h1>
-
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -38,28 +42,15 @@ include_once('../includes/header.php')
         <div class="row text-muted">
             <div class="col-6 text-start">
                 <p class="mb-0">
-                    <a href="index.html" class="text-muted"><strong>AdminKit Demo</strong></a> &copy;
+                    <a href="https://github.com/hkwarui" class="text-muted"><strong>hkwarui</strong></a> &copy <?php echo date('Y') . "  "; ?>
                 </p>
             </div>
             <div class="col-6 text-end">
-                <ul class="list-inline">
-                    <li class="list-inline-item">
-                        <a class="text-muted" href="#">Support</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="text-muted" href="#">Help Center</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="text-muted" href="#">Privacy</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="text-muted" href="#">Terms</a>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
 </footer>
+
 </div>
 </div>
 

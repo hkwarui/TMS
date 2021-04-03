@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once("login.php");
 ?>
 <!DOCTYPE html>
@@ -40,12 +40,11 @@ include_once("login.php");
                                     <form method="post">
                                         <div class="mb-2">
                                             <?php
-                if (isset($msg)) {
-                    echo $msg;
-                    unset($msg);
-                    header("refresh:5");
-                }
-                ?>
+                                            if (isset($msg)) {
+                                                echo $msg;
+                                                unset($msg);
+                                            }
+                                            ?>
                                         </div>
                                         <div class="mb-2">
                                             <label class="form-label"><b>Username</b></label>
@@ -53,8 +52,7 @@ include_once("login.php");
                                                 <div class="input-group-text bg-primary">
                                                     <span class="fas fa-user" style="color:white"></span>
                                                 </div>
-                                                <input class="form-control form-control-lg" type="text" id="username"
-                                                    name="username" required>
+                                                <input class="form-control form-control-lg" type="text" id="username" name="username" required>
                                             </div>
                                         </div>
                                         <div class="mb-2">
@@ -63,12 +61,14 @@ include_once("login.php");
                                                 <div class="input-group-text bg-primary">
                                                     <span class="fas fa-lock" style="color:white"></span>
                                                 </div>
-                                                <input class="form-control form-control-lg" type="password"
-                                                    id="password" name="password" required>
+                                                <input class="form-control form-control-lg" type="password" id="password" name="password" required>
                                             </div>
+                                        </div>
+                                        <div class="mb-2">
                                             <small>
                                                 <a href="pages-reset-password.html">Forgot password?</a>
                                             </small>
+                                            <small style="float:right"> <a href="signup.php">Don't have a account ? Signup</a></small>
                                         </div>
 
                                         <div class="text-center mt-2">

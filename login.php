@@ -22,20 +22,22 @@ if (isset($_POST['login_user'])) {
     if ($count > 0) {
 
         if ($row['login_status'] == 1) {
-            if ($row['user_type'] == 1) {
+            if ($row['role_id'] == 1) {
                 $_SESSION['username'] = $row['username'];
-                $_SESSION['user_type'] = $row['user_type'];
+                $_SESSION['name'] = $row['name'];
+                $_SESSION['role_id'] = $row['role_id'];
                 $_SESSION['login_status'] = $row['login_status'];
-                $_SESSION['msg'] = "<div class='alert alert-success p-3'>You are logged in as " . ucfirst($_SESSION['username']) . "</div>";
+                $_SESSION['msg'] = "You are logged in as " . ucwords($_SESSION['name']);
 
                 header("Location: admin");
                 exit;
             }
-            if ($row['user_type'] == 2) {
+            if ($row['role_id'] == 2) {
                 $_SESSION['username'] = $row['username'];
-                $_SESSION['user_type'] = $row['user_type'];
+                $_SESSION['name'] = $row['name'];
+                $_SESSION['role_id'] = $row['role_id'];
                 $_SESSION['login_status'] = $row['login_status'];
-                $_SESSION['msg'] = "<div class='alert alert-success p-3'>You are logged in as " . ucfirst($_SESSION['username']) . "</div>";
+                $_SESSION['msg'] = "<div class='alert alert-success center'>You are logged in as " . ucwords($_SESSION['name']) . "</div>";
 
                 header("Location: user");
                 exit;
@@ -48,4 +50,3 @@ if (isset($_POST['login_user'])) {
         $msg = "<div class='alert alert-danger p-3'>Incorrect Username or Password.</div>";
     }
 }
-?>

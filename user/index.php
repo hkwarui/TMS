@@ -1,103 +1,58 @@
 <?php
 require_once "auth.php";
-?>
+include_once('../includes/header.php');
 
-<!DOCTYPE html>
-<html lang="en">
+//DISPLAY A MESSAGE IF ANY 
+if (isset($_SESSION['msg'])) {
+    echo '<div class="alert alert-success ml-5 p-1">';
+    echo $_SESSION['msg'];
+    unset($_SESSION['msg']);
+    echo "</div>";
+} ?>
+<script>
+    $(function() {
+        setTimeout(function() {
+            $(".alert").hide('slow');
+        }, 4000);
+    });
+</script>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TMS</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-</head>
-
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-                </li>
-            </ul>
-
-            <!-- Right navbar links -->
-
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="" class="nav-link"> <i class="nav-icon fas fa-user"></i> <span><?php echo ucfirst($username); ?></span></a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="../logout.php" class="nav-link" title="Logout"><i style=" color:red" class="nav-icon fas fa-power-off"></i></a>
-                </li>
-            </ul>
-        </nav>
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <a href="index.php" class="brand-link">
-                <span class="brand-text font-weight-light">TMS</span>
-            </a>
-
-            <div class="sidebar">
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-book"></i>
-                                <p>
-                                    Add participants
-                                </p>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </aside>
-
-        <div class="content-wrapper">
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-12" style="text-align: center;">
-                            <?php
-                            if (isset($_SESSION['msg'])) {
-                                echo $_SESSION['msg'];
-                                unset($_SESSION['msg']);
-                                header("refresh:3");
-                            }
-                            ?>
-                        </div>
+<main class="content">
+    <div class="container-fluid p-0">
+        <h1 class="h3 mb-3">Blank Page</h1>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Empty card</h5>
                     </div>
-                    <div class="row mb-2">
-
-                        <div class="col-sm-6">
-                            <h1 class="m-0">Company Admin Page</h1>
-                        </div>
+                    <div class="card-body">
                     </div>
                 </div>
             </div>
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-
-                    </div>
-                </div>
-            </div>
-
         </div>
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-inline">
-                Anything you want
-            </div>
-            <strong>Copyright &copy; 2021 <a href="https://github.com/hkwarui">hkwarui</a>.</strong> All rights reserved.
-        </footer>
-    </div>
 
-    <script src="../plugins/jquery/jquery.min.js"></script>
-    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../dist/js/adminlte.min.js"></script>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row text-muted">
+            <div class="col-6 text-start">
+                <p class="mb-0">
+                    &copy <a href="https://github.com/hkwarui" class="text-muted"><strong>hkwarui</strong></a>
+                </p>
+            </div>
+            <div class="col-6 text-end">
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+<script src="../static/js/app.js"></script>
+
 </body>
 
 </html>
