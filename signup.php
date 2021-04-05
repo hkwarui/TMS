@@ -134,9 +134,18 @@ include_once("login.php");
                     }
                 },
                 messages: {
-                    username: {
-                        required: 'username is required',
-                    }
+                    // username: {
+                    //     required: 'username is required',
+                    // },
+                    // fullname: "Name is required",
+                    // company: 'Company is required',
+                    // password: {
+                    //     required: "Password is required",
+                    // },
+                    // confirm_password: {
+                    //     required: 'Repeat password is required',
+                    //     equalTo: 'Must be the same as password'
+                    // }
                 },
                 errorElement: 'span',
                 errorPlacement: function(error, element) {
@@ -147,7 +156,9 @@ include_once("login.php");
                     $(element).addClass('is-invalid');
                 },
                 unhihlight: function(element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid')
+                    $(element).removeClass('is-invalid');
+                    error.removeClass('invalid-feedback');
+                    // $(element).addClass('valid');
                 },
                 submitHandler: function(form) {
                     form.submit();
