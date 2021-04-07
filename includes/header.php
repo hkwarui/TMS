@@ -1,3 +1,6 @@
+<?php
+require_once "../admin/auth.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,14 +11,12 @@
     <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
     <meta name="author" content="AdminKit">
     <meta name="keywords" content="TMS, Training,Managment,Solution">
-    <!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
     <link rel="shortcut icon" href="../static/img/icons/favicon.png" />
     <title>TMS </title>
     <link href="../static/css/app.css" rel="stylesheet">
     <script src="../static/js/jquery.min.js"></script>
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-        < /head> 
-        -->
+    <script src="../static/js/jquery.validate.min.js"></script>
+    <script src="../static/js/app.js"></script>
 
 <body>
     <div class="wrapper">
@@ -31,36 +32,70 @@
                     <li class="sidebar-header">
                         Pages
                     </li>
+                    <?php
+                    if (isInstuctor()) {
+                    ?>
 
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" href="index.php">
-                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="index.php">
-                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="index.php">
-                            <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="index.php">
-                            <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">Invoice</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item ">
-                        <a class="sidebar-link" href="index.php">
-                            <i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
-                        </a>
-                    </li>
+                        <li class="sidebar-item active">
+                            <a class="sidebar-link" href="index.php">
+                                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#facilitator" data-bs-toggle="collapse" class="sidebar-link collapsed">
+                                <i class="align-middle" data-feather="users"></i> <span class="align-middle">Facilitator</span>
+                            </a>
+                            <ul id="facilitator" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+                                <li class="sidebar-item"><a class="sidebar-link" href="add_facilitator.php">Add Facilitator</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="manage_facilitator.php">Manage Facilitator</a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#course" data-bs-toggle="collapse" class="sidebar-link collapsed">
+                                <i class="align-middle" data-feather="book-open"></i> <span class="align-middle">Course</span>
+                            </a>
+                            <ul id="course" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Add Course</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Manage Course</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Manage class</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Shedule class</a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#participant" data-bs-toggle="collapse" class="sidebar-link collapsed">
+                                <i class="align-middle" data-feather="users"></i> <span class="align-middle">Participants</span>
+                            </a>
+                            <ul id="participant" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Add Participant</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Manage Participant</a></li>
+                            </ul>
+                        </li>
+                    <?php }
+                    if (isFacilitator()) {
+                    ?>
+                        <li class="sidebar-item active">
+                            <a class="sidebar-link" href="home.php">
+                                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#course" data-bs-toggle="collapse" class="sidebar-link collapsed">
+                                <i class="align-middle" data-feather="book-open"></i> <span class="align-middle">Course</span>
+                            </a>
+                            <ul id="course" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">view Courses</a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#participant" data-bs-toggle="collapse" class="sidebar-link collapsed">
+                                <i class="align-middle" data-feather="users"></i> <span class="align-middle">Participants</span>
+                            </a>
+                            <ul id="participant" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
+                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Add Participant</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Manage Participant</a></li>
+                            </ul>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div>
         </nav>
@@ -70,15 +105,6 @@
                 <a class="sidebar-toggle d-flex">
                     <i class="hamburger align-self-center"></i>
                 </a>
-
-                <form class="d-none d-sm-inline-block">
-                    <div class="input-group input-group-navbar">
-                        <input type="text" class="form-control" placeholder="Search…" aria-label="Search">
-                        <button class="btn" type="button">
-                            <i class="align-middle" data-feather="search"></i>
-                        </button>
-                    </div>
-                </form>
 
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav navbar-align">

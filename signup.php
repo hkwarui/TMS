@@ -134,9 +134,9 @@ include_once("login.php");
                     }
                 },
                 messages: {
-                    // username: {
-                    //     required: 'username is required',
-                    // },
+                    username: {
+                        required: 'username is required',
+                    },
                     // fullname: "Name is required",
                     // company: 'Company is required',
                     // password: {
@@ -157,7 +157,7 @@ include_once("login.php");
                 },
                 unhihlight: function(element, errorClass, validClass) {
                     $(element).removeClass('is-invalid');
-                    error.removeClass('invalid-feedback');
+                    error.reClass('invalid-feedback');
                     // $(element).addClass('valid');
                 },
                 submitHandler: function(form) {

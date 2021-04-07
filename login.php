@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "db_config.php";
+require_once "includes/db_config.php";
 
 if (isset($_POST['login_user'])) {
 
@@ -37,9 +37,9 @@ if (isset($_POST['login_user'])) {
                 $_SESSION['name'] = $row['name'];
                 $_SESSION['role_id'] = $row['role_id'];
                 $_SESSION['login_status'] = $row['login_status'];
-                $_SESSION['msg'] = "<div class='alert alert-success center'>You are logged in as " . ucwords($_SESSION['name']) . "</div>";
+                $_SESSION['msg'] = "You are logged in as " . ucwords($_SESSION['name']);
 
-                header("Location: user");
+                header("Location: admin");
                 exit;
             }
         }

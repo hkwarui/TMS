@@ -1,16 +1,28 @@
-
 <?php
 session_start();
-
 if (!$_SESSION['role_id'] || !$_SESSION['login_status']) {
     header("Location: ../index.php");
     exit;
 }
-// $msg = $_SESSION['msg'];
-$username = $_SESSION['username'];
-// $name = $_SESSION['name'];
 
-// if ($_SESSION['role_id'] == 2 || $_SESSION['login_status'] == 2) {
-//     header("Location: ../");
-//     exit;
-// }
+$username = $_SESSION['username'];
+
+//CHECK IF USER IS INSTRUCTOR
+function isInstuctor()
+{
+    if ($_SESSION['role_id'] == 1) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+//CHECK IF USER IS INSTRUCTOR
+function isFacilitator()
+{
+    if ($_SESSION['role_id'] == 2) {
+        return true;
+    } else {
+        return false;
+    }
+};

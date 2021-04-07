@@ -1,5 +1,4 @@
 <?php
-require_once "auth.php";
 include_once('../includes/header.php');
 
 //DISPLAY A MESSAGE IF ANY 
@@ -9,7 +8,9 @@ if (isset($_SESSION['msg'])) {
     unset($_SESSION['msg']);
     echo "</div>";
 } ?>
+
 <script>
+    // HIDE MESSAGE AFTER 4 SECS
     $(function() {
         setTimeout(function() {
             $(".alert").hide('slow');
@@ -40,7 +41,7 @@ if (isset($_SESSION['msg'])) {
         <div class="row text-muted">
             <div class="col-6 text-start">
                 <p class="mb-0">
-                    &copy <a href="https://github.com/hkwarui" class="text-muted"><strong>hkwarui</strong></a>
+                    <a href="https://github.com/hkwarui" class="text-muted"><strong>hkwarui</strong></a> &copy <?php echo date('Y') . "  "; ?>
                 </p>
             </div>
             <div class="col-6 text-end">
@@ -48,6 +49,7 @@ if (isset($_SESSION['msg'])) {
         </div>
     </div>
 </footer>
+
 </div>
 </div>
 

@@ -52,6 +52,9 @@ if (isset($_SESSION['msg'])) {
 
 </div>
 </div>
+
+<script src="../static/js/app.js"></script>
+
 </body>
 
 </html>
