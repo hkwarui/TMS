@@ -14,6 +14,7 @@ require_once "../admin/auth.php";
     <link rel="shortcut icon" href="../static/img/icons/favicon.png" />
     <title>TMS </title>
     <link href="../static/css/app.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css">
     <script src="../static/js/jquery.min.js"></script>
     <script src="../static/js/jquery.validate.min.js"></script>
     <script src="../static/js/app.js"></script>
@@ -36,7 +37,7 @@ require_once "../admin/auth.php";
                     if (isInstuctor()) {
                     ?>
 
-                        <li class="sidebar-item active">
+                        <li class="sidebar-item">
                             <a class="sidebar-link" href="index.php">
                                 <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                             </a>
@@ -55,10 +56,10 @@ require_once "../admin/auth.php";
                                 <i class="align-middle" data-feather="book-open"></i> <span class="align-middle">Course</span>
                             </a>
                             <ul id="course" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Add Course</a></li>
-                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Manage Course</a></li>
-                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Manage class</a></li>
-                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Shedule class</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="addCourse.php">Add Course</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="courses.php">View Courses</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="class.php">view classes</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="sheduleClass.php">Shedule class</a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item">
@@ -66,7 +67,7 @@ require_once "../admin/auth.php";
                                 <i class="align-middle" data-feather="users"></i> <span class="align-middle">Participants</span>
                             </a>
                             <ul id="participant" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Add Participant</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="addParticipant.php">Add Participant</a></li>
                                 <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Manage Participant</a></li>
                             </ul>
                         </li>
@@ -83,7 +84,7 @@ require_once "../admin/auth.php";
                                 <i class="align-middle" data-feather="book-open"></i> <span class="align-middle">Course</span>
                             </a>
                             <ul id="course" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">view Courses</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="courses.php">view Courses</a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item">
@@ -91,7 +92,7 @@ require_once "../admin/auth.php";
                                 <i class="align-middle" data-feather="users"></i> <span class="align-middle">Participants</span>
                             </a>
                             <ul id="participant" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Add Participant</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="addParticipant.php">Add Participant</a></li>
                                 <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Manage Participant</a></li>
                             </ul>
                         </li>
@@ -131,9 +132,9 @@ require_once "../admin/auth.php";
                 // SCRIPT TO HIGHLIGHT ACTIVE  CLASS
                 $(document).ready(function() {
                     $('.sidebar-nav li').click(function(e) {
-                        e.preventDefault();
                         $(this).siblings().removeClass('active');
                         $(this).addClass('active');
+                        // e.preventDefault()
                     });
                 });
             </script>

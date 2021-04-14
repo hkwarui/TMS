@@ -1,5 +1,6 @@
 <?php
 include_once('../includes/header.php');
+require_once '../includes/db_config.php';
 
 //DISPLAY SUCCESS MESSAGE IF ANY 
 if (isset($_SESSION['msg'])) {
@@ -29,67 +30,80 @@ if (isset($_SESSION['error_msg'])) {
 
 <main class="content">
     <div class="container-fluid p-0">
-        <h1 class="h3 mb-3">Add Facilitator</h1>
+        <h1 class="h3 mb-3">Add Course</h1>
         <div class="row">
-            <div class="col-12 col-lg-12">
+            <div class="col-12">
                 <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0"></h5>
+                    </div>
                     <div class="card-body">
-                        <form action="save_facilitator.php" method="post" id="add_facilitator">
-                            <input type="hidden" class="form-control" value="add_facilitator" name="form_id">
+                        <form action="saveCourse.php" method="post" id="addCourse">
+                            <input type="hidden" class="form-control" value="addCourse" name="form_id">
                             <div class="row">
                                 <div class="col-12 col-lg-1"></div>
                                 <div class="col-12 col-lg-4">
                                     <div class="mb-2">
-                                        <label class="form-label"><b>Username</b></label>
+                                        <label class="form-label"><b>Course Name</b></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="username" name="username" placeholder="username">
+                                            <input type="text" class="form-control" id="courseName" name="courseName" placeholder="e.g Security Airside Training">
+                                        </div>
+                                    </div>
+                                    <?php
+
+
+                                    //Get last insertedID       
+                                    $sql = $db->prepare("SELECT max(id) FROM courses");
+                                    $sql->execute();
+                                    $row = $sql->fetchColumn();
+                                    $courseId = $row + 1;
+                                    ?>
+                                    <div class="mb-2">
+                                        <label class="form-label"><b>Course ID</b></label>
+                                        <div class="input-group">
+                                            <input type='text' class="form-control" value="<?php echo 'SS-' . $courseId ?>" name="courseId" readonly>
                                         </div>
                                     </div>
                                     <div class="mb-2">
-                                        <label class="form-label"><b>FullName</b></label>
+                                        <label class="form-label"><b>Validity (Yrs.)</b></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="fullname" placeholder="Fullname">
-                                        </div>
-                                    </div>
-                                    <div class="mb-2">
-                                        <label class="form-label"><b>Email</b></label>
-                                        <div class="input-group">
-                                            <input type="email" class="form-control" name="email" placeholder="Email">
+                                            <input type="text" class="form-control" name="validity" placeholder="e.g 2Yrs ">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-2"></div>
                                 <div class="col-12 col-lg-4">
                                     <div class="mb-2">
-                                        <label class="form-label"><b> Phone No.</b></label>
+                                        <label class="form-label"><b>Course Duration (Days)</b></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="phone" placeholder="Phone">
+                                            <input type="text" class="form-control" name="duration" placeholder="e.g 10 Days">
                                         </div>
                                     </div>
                                     <div class="mb-2">
-                                        <label class="form-label"><b>ID. No / PPT. No</b></label>
+                                        <label class="form-label"><b>Cost (Ksh.)</b></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="passport" placeholder="ID / Passport No.">
+                                            <input type="text" class="form-control" name="cost" placeholder="e.g 10,000">
                                         </div>
                                     </div>
                                     <div class="mb-2">
-                                        <label class="form-label"><b>Company</b></label>
+                                        <label class="form-label"><b>Course Instructor</b></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="company" placeholder="Company">
+                                            <input type="text" class="form-control" name="instructor" placeholder="e.g Martin Waweru">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-1"></div>
                                 <div class="text-center mt-4">
-                                    <button type="submit" name="login_user" class="btn btn-lg btn-primary"> Add </button>
+                                    <button type="submit" class="btn btn-lg btn-primary"> Add Course </button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
         </div>
+
+    </div>
 </main>
 
 <footer class="footer">
@@ -109,13 +123,12 @@ if (isset($_SESSION['error_msg'])) {
 </div>
 </div>
 
-
 <script>
-    // VALIDATE FACILITATOR ADD FORM
+    // VALIDATE COURSE CREATION FORM
     $(document).ready(function() {
-        $('#add_facilitator').validate({
+        $('#addCourse').validate({
             rules: {
-                username: {
+                courseName: {
                     required: true,
                     minlength: 3,
                     remote: {
@@ -129,25 +142,23 @@ if (isset($_SESSION['error_msg'])) {
                         dataType: 'json'
                     },
                 },
-                fullname: 'required',
-                email: {
-                    required: true,
-                    email: true
-                },
-                phone: {
-                    required: true,
-                    digits: true,
-                    minlength: 10,
-                    maxlength: 12
-                },
-                passport: {
+                validity: {
                     required: true,
                     digits: true
                 },
-                company: 'required'
+                duration: {
+                    required: true,
+                    digits: true
+                },
+                cost: {
+                    required: true,
+                    digits: true,
+                    minlength: 0,
+                },
+                instructor: 'required',
             },
             messages: {
-                username: {
+                courseName: {
                     remote: "Username is already taken"
                 }
             },
@@ -169,6 +180,8 @@ if (isset($_SESSION['error_msg'])) {
         })
     })
 </script>
+
+
 
 <script src="../static/js/app.js"></script>
 

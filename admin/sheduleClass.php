@@ -1,7 +1,7 @@
 <?php
 include_once('../includes/header.php');
-
-//DISPLAY SUCCESS MESSAGE IF ANY 
+require_once '../includes/db_config.php';
+//DISPLAY SUCCESS MESSAGE IF ANY
 if (isset($_SESSION['msg'])) {
     echo '<div class="alert alert-success ml-5 p-1">';
     echo $_SESSION['msg'];
@@ -9,7 +9,7 @@ if (isset($_SESSION['msg'])) {
     echo "</div>";
 };
 
-//DISPLAY ERROR MESSAGE IF ANY 
+//DISPLAY ERROR MESSAGE IF ANY
 if (isset($_SESSION['error_msg'])) {
     echo '<div class="alert alert-danger ml-5 p-1">';
     echo $_SESSION['msg'];
@@ -29,67 +29,76 @@ if (isset($_SESSION['error_msg'])) {
 
 <main class="content">
     <div class="container-fluid p-0">
-        <h1 class="h3 mb-3">Add Facilitator</h1>
+        <h1 class="h3 mb-3"> Shedule class</h1>
         <div class="row">
-            <div class="col-12 col-lg-12">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="save_facilitator.php" method="post" id="add_facilitator">
-                            <input type="hidden" class="form-control" value="add_facilitator" name="form_id">
+                        <form action="saveSheduleClass.php" method="post" class="scheduleClass">
+                            <input type="hidden" class="form-control" value="sheduleClass" name="form_id">
                             <div class="row">
                                 <div class="col-12 col-lg-1"></div>
                                 <div class="col-12 col-lg-4">
                                     <div class="mb-2">
-                                        <label class="form-label"><b>Username</b></label>
+                                        <label class="form-label"><b>Select Course </b></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="username" name="username" placeholder="username">
+                                            <select class="form-control course" id="course" name="course">
+                                                <?php
+                                                $sql = $db->prepare("SELECT * FROM courses");
+                                                $sql->execute();
+                                                while ($row = $sql->fetch()) {;
+                                                ?>
+                                                    <option value="<?php echo $row['courseId'] ?>"><?php echo $row['courseName'] ?></option>
+                                                <?php } ?>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="mb-2">
-                                        <label class="form-label"><b>FullName</b></label>
+                                        <label class="form-label"><b>Start Time</b></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="fullname" placeholder="Fullname">
+                                            <input type='time' class="form-control" name="startTime">
                                         </div>
                                     </div>
                                     <div class="mb-2">
-                                        <label class="form-label"><b>Email</b></label>
+                                        <label class="form-label"><b>Venue</b></label>
                                         <div class="input-group">
-                                            <input type="email" class="form-control" name="email" placeholder="Email">
+                                            <input type="text" class="form-control" name="venue" placeholder="e.g Online ">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-2"></div>
+                                <?php
+                                $sql2 = $db->prepare("SELECT max(id) FROM cohorts");
+                                $sql2->execute();
+                                $row2 = $sql2->fetchColumn();
+                                $cohortId = $row2 + 1;
+                                ?>
                                 <div class="col-12 col-lg-4">
                                     <div class="mb-2">
-                                        <label class="form-label"><b> Phone No.</b></label>
+                                        <label class="form-label"><b>Cohort</b></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="phone" placeholder="Phone">
+                                            <input type="text" class="form-control" name="cohort" value="<?php echo "Cohort-0" . $cohortId . "/" . date('Y') ?>" placeholder="e.g Cohort01/2021" readonly>
                                         </div>
                                     </div>
                                     <div class="mb-2">
-                                        <label class="form-label"><b>ID. No / PPT. No</b></label>
+                                        <label class="form-label"><b>Course Instructor</b></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="passport" placeholder="ID / Passport No.">
-                                        </div>
-                                    </div>
-                                    <div class="mb-2">
-                                        <label class="form-label"><b>Company</b></label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="company" placeholder="Company">
+                                            <input type="text" class="form-control" id="instructor" name="instructor" readonly>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-1"></div>
                                 <div class="text-center mt-4">
-                                    <button type="submit" name="login_user" class="btn btn-lg btn-primary"> Add </button>
+                                    <button type="submit" class="btn btn-lg btn-primary"> Schedule Class </button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
         </div>
+
+    </div>
 </main>
 
 <footer class="footer">
@@ -108,48 +117,38 @@ if (isset($_SESSION['error_msg'])) {
 
 </div>
 </div>
-
-
 <script>
-    // VALIDATE FACILITATOR ADD FORM
     $(document).ready(function() {
-        $('#add_facilitator').validate({
-            rules: {
-                username: {
-                    required: true,
-                    minlength: 3,
-                    remote: {
-                        url: "check_username.php",
-                        type: "post",
-                        data: {
-                            username: function() {
-                                return $("#username").val();
-                            }
-                        },
-                        dataType: 'json'
-                    },
+        // Populate Instructor field when you select a course
+        $('.course').on("change", function(e) {
+            e.preventDefault();
+            var courseId = $(this).val();
+
+            $.ajax({
+                url: 'loadData.php',
+                method: 'post',
+                data: {
+                    courseId: courseId
                 },
-                fullname: 'required',
-                email: {
-                    required: true,
-                    email: true
+                dataType: 'json',
+                success: function(data) {
+                    $('#instructor').val(data['instructor'])
                 },
-                phone: {
-                    required: true,
-                    digits: true,
-                    minlength: 10,
-                    maxlength: 12
-                },
-                passport: {
-                    required: true,
-                    digits: true
-                },
-                company: 'required'
-            },
-            messages: {
-                username: {
-                    remote: "Username is already taken"
+                error: function(data) {
+                    console.log(data);
                 }
+
+            })
+        });
+        // Validate schedule class form 
+
+        $('.scheduleClass').validate({
+            rules: {
+                course: 'required',
+                startTime: 'required',
+                venue: 'required',
+                cohort: 'required',
+                instructor: 'required',
             },
             errorElement: 'span',
             errorPlacement: function(error, element) {
@@ -165,8 +164,8 @@ if (isset($_SESSION['error_msg'])) {
             submitHandler: function(form) {
                 form.submit();
             }
-
         })
+
     })
 </script>
 

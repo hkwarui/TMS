@@ -1,0 +1,12 @@
+.search {
+    margin: 0 auto;
+    float: none;
+    border-radius: 10px 10px 10px 10px;
+    border: 2px solid #678DB9;
+    outline: none;
+}
+
+.search:focus {
+    color: #346FB1;
+}
+
