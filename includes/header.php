@@ -48,7 +48,7 @@ require_once "../admin/auth.php";
                             </a>
                             <ul id="facilitator" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
                                 <li class="sidebar-item"><a class="sidebar-link" href="add_facilitator.php">Add Facilitator</a></li>
-                                <li class="sidebar-item"><a class="sidebar-link" href="manage_facilitator.php">Manage Facilitator</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="manageFacilitator.php">Manage Facilitator</a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item">
@@ -58,7 +58,6 @@ require_once "../admin/auth.php";
                             <ul id="course" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
                                 <li class="sidebar-item"><a class="sidebar-link" href="addCourse.php">Add Course</a></li>
                                 <li class="sidebar-item"><a class="sidebar-link" href="courses.php">View Courses</a></li>
-                                <li class="sidebar-item"><a class="sidebar-link" href="class.php">view classes</a></li>
                                 <li class="sidebar-item"><a class="sidebar-link" href="sheduleClass.php">Shedule class</a></li>
                             </ul>
                         </li>
@@ -68,7 +67,7 @@ require_once "../admin/auth.php";
                             </a>
                             <ul id="participant" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
                                 <li class="sidebar-item"><a class="sidebar-link" href="addParticipant.php">Add Participant</a></li>
-                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Manage Participant</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="viewParticipants.php">Manage Participant</a></li>
                             </ul>
                         </li>
                     <?php }

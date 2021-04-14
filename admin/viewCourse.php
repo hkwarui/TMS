@@ -54,15 +54,18 @@ if (isset($_GET['id'])) {
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 col-lg-3">
-                                <span><i class="align-middle me-1" data-feather="activity"></i> Valid for <?php echo $row['validity'] ?> Years.</span>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <span><i class="align-middle me-1" data-feather="clock"></i> <?php echo $row['duration'] ?> To complete the Course.</span>
+                                <span><i class="align-middle me-1" data-feather="clock"></i> <?php echo $row['duration'] ?> Hours To complete the Course.</span>
                             </div>
                             <div class="col-12 col-lg-3">
                                 <span><i class="align-middle me-1" data-feather="user-check"></i> Taught by <?php echo ucwords($row['instructor']) ?></span>
                             </div>
-                            <div class="col-12 col-lg-3">
+                            <div class="col-12 col-lg-2">
+                                <span><i class="align-middle me-1" data-feather="activity"></i> Valid for <?php echo $row['validity'] ?> Years.</span>
+                            </div>
+                            <div class="col-12 col-lg-2">
+                                <span><i class="align-middle me-1" data-feather="shopping-cart"></i>Cost: <?php echo  $row['cost'] != 0 ? " Ksh. " . $row['cost']  :  " Free"; ?> </span>
+                            </div>
+                            <div class="col-12 col-lg-2">
                                 <span><a href="http://"><i class="align-middle me-1" data-feather="edit-2"></i></a><a href="http://"><i class="align-middle me-1" data-feather="trash-2"></i></a></span>
                             </div>
                         </div>
@@ -74,7 +77,7 @@ if (isset($_GET['id'])) {
                             <h5 class="card-title mb-0">Sheduled Classes </h5>
                         </div>
                         <div class="card-body">
-                            <table class="table">
+                            <table class="table table-hover table-sm">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
