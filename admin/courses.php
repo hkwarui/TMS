@@ -53,7 +53,7 @@ if (isset($_SESSION['error_msg'])) {
                 while ($row = $stm->fetch()) {
                 ?>
                     <div class="col-12 col-lg-3">
-                        <a href="viewCourse.php">
+                        <a href="viewCourse.php?id=<?php echo $row['courseId']; ?>">
                             <div class="card">
                                 <div class="card-body">
                                     <h6><?php echo $row['courseId'] . ":  " . ucwords($row['courseName']); ?></h6>
@@ -111,21 +111,20 @@ if (isset($_SESSION['error_msg'])) {
                         $('.searchDisplay div').remove();
                         $('.searchDisplay p').remove();
                         data.forEach(element => {
-                            $('.searchDisplay').append(`<div class = "col-12 col-lg-3"><div class ="card"><div class="card-body"><h6> ${element.courseId}: ${element.courseName} </h6><hr> <p>${element.duration} Hours of content </p><p> Cost: Ksh. ${element.cost} </p><p> Instructor:${element.instructor}</p></div></div></div>`)
+                            $('.searchDisplay').append(`<div class ="col-12 col-lg-3"><a href="viewCourse.php?id=${element.courseId}"><div class ="card"><div class="card-body"><h6> ${element.courseId}: ${element.courseName} </h6><hr><p>${element.duration} Hours of content </p><p> Cost: Ksh. ${element.cost} </p><p> Instructor:${element.instructor}</p></div></div></a></div>`)
                         })
                     }
                     if (!searchTerm && data.length > 0) {
-                        console.log(` Suceessful with  ${data.length} search result`);
+                        // console.log(` Suceessful with  ${data.length} search result`);
                         $(".coursesDisplay").show();
                         $('.searchDisplay div').remove();
                         $('.searchDisplay p').remove();
                     }
 
                     if (data.length == 0) {
-                        console.log(` Suceessful with  ${data.length} search result`);
+                        // console.log(` Suceessful with  ${data.length} search result`);
                         $(".searchDisplay").html("<p>No search results available !");
                     }
-
                 },
                 error: function(data) {
                     console.log(data.responseText)
