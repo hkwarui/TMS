@@ -15,7 +15,9 @@ require_once "../admin/auth.php";
     <title>TMS </title>
     <link href="../static/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <script src="../static/js/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="../static/js/jquery.validate.min.js"></script>
     <script src="../static/js/app.js"></script>
 
@@ -47,8 +49,8 @@ require_once "../admin/auth.php";
                                 <i class="align-middle" data-feather="users"></i> <span class="align-middle">Facilitator</span>
                             </a>
                             <ul id="facilitator" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-                                <li class="sidebar-item"><a class="sidebar-link" href="add_facilitator.php">Add Facilitator</a></li>
-                                <li class="sidebar-item"><a class="sidebar-link" href="manageFacilitator.php">Manage Facilitator</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="addFacilitator.php">Add Facilitator</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="viewFacilitator.php">View Facilitator</a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item">
@@ -58,7 +60,8 @@ require_once "../admin/auth.php";
                             <ul id="course" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
                                 <li class="sidebar-item"><a class="sidebar-link" href="addCourse.php">Add Course</a></li>
                                 <li class="sidebar-item"><a class="sidebar-link" href="courses.php">View Courses</a></li>
-                                <li class="sidebar-item"><a class="sidebar-link" href="sheduleClass.php">Shedule class</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="sheduleClass.php">Shedule Class</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="viewClass.php">View Class</a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item">
@@ -67,7 +70,7 @@ require_once "../admin/auth.php";
                             </a>
                             <ul id="participant" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
                                 <li class="sidebar-item"><a class="sidebar-link" href="addParticipant.php">Add Participant</a></li>
-                                <li class="sidebar-item"><a class="sidebar-link" href="viewParticipants.php">Manage Participant</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="viewParticipants.php">View Participant</a></li>
                             </ul>
                         </li>
                     <?php }
@@ -126,14 +129,11 @@ require_once "../admin/auth.php";
                 </div>
             </nav>
 
-
             <script type="text/javascript">
-                // SCRIPT TO HIGHLIGHT ACTIVE  CLASS
                 $(document).ready(function() {
                     $('.sidebar-nav li').click(function(e) {
                         $(this).siblings().removeClass('active');
                         $(this).addClass('active');
-                        // e.preventDefault()
                     });
                 });
             </script>

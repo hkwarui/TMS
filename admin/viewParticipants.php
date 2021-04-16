@@ -21,12 +21,12 @@ if (isset($_SESSION['msg'])) {
 
 <main class="content">
     <div class="container-fluid p-0">
-        <h1 class="h3 mb-3">Company Facilitators</h1>
+        <h1 class="h3 mb-3">Participants</h1>
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-hover table-sm">
+                        <table class="table table-hover table-sm" id="myTable">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -43,10 +43,10 @@ if (isset($_SESSION['msg'])) {
                                 <?php
                                 $no = 1;
                                 //Load Classes info
-                                $sth = $db->prepare("SELECT * FROM participants");
+                                $sth = $db->prepare("SELECT * FROM participants ORDER BY fullname ASC");
                                 $sth->execute();
-                                $row1 = $sth->fetch();
-                                if ($row1) {
+                                $count = $sth->rowCount();
+                                if ($count > 0) {
                                     while ($result = $sth->fetch()) {
                                 ?>
                                         <tr>
@@ -57,11 +57,11 @@ if (isset($_SESSION['msg'])) {
                                             <td><?php echo $result['passport']; ?></td>
                                             <td><?php echo ucwords($result['company']); ?></td>
                                             <td><?php echo ucwords($result['designation']); ?></td>
-                                            <td> <a href="http://"><i class="align-middle me-1" data-feather="edit-2"></i></a><a href="http://"><i class="align-middle me-1" data-feather="trash-2"></i></a> </td>
+                                            <td> <a title="Edit" href="editParticipants.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a><a onclick="return confirm('Please confirm deletion');" title="Delete" href="deleteCourse.php?id=<?php echo $row['id']; ?>?coz_id=<?php echo $row['courseId']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a> </td>
                                         </tr>
                                     <?php }
                                 }
-                                if (!$row1) { ?>
+                                if ($count <= 0) { ?>
                                     <tr>
                                         <td colspan="5"><b> No Scheduled classes in this Course !</b> </td>
                                     </tr>
@@ -92,6 +92,11 @@ if (isset($_SESSION['msg'])) {
 
 </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#myTable').dataTable({})
+    })
+</script>
 
 <script src="../static/js/app.js"></script>
 

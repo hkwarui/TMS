@@ -102,7 +102,7 @@ if (isset($_GET['id'])) {
                                                 <td><?php echo $result['cohortId']; ?></td>
                                                 <td><?php echo $result['startTime']; ?></td>
                                                 <td><?php echo $result['venue']; ?></td>
-                                                <td><a title="View" href="viewClass.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="eye"></i></a><a title="Edit" href="editClass.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a><a onclick="return confirm('Please confirm deletion');" title="Delete" href="deleteClass.php?id=<?php echo $result['id']; ?>?coz_id=<?php echo $result['courseId']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a> </td>
+                                                <td> <a title="Edit" href="editClass.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a><a onclick="return confirm('Please confirm deletion');" title="Delete" href="deleteClass.php?id=<?php echo $result['id']; ?>?coz_id=<?php echo $result['courseId']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a> </td>
                                             </tr>
                                         <?php }
                                     }

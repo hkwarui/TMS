@@ -1,6 +1,16 @@
 <?php
 include_once('../includes/header.php');
 require_once '../includes/db_config.php';
+
+$id = $_GET['id'];
+$stm = $db->prepare("SELECT * FROM cohorts WHERE id = ?");
+$stm->execute([$id]);
+$row = $stm->fetch();
+
+$stm1 = $db->prepare("SELECT * FROM courses WHERE courseId = ?");
+$stm1->execute([$row['courseId']]);
+$row1 = $stm1->fetch();
+
 //DISPLAY SUCCESS MESSAGE IF ANY
 if (isset($_SESSION['msg'])) {
     echo '<div class="alert alert-success ml-5 p-1">';
@@ -29,41 +39,31 @@ if (isset($_SESSION['error_msg'])) {
 
 <main class="content">
     <div class="container-fluid p-0">
-        <h1 class="h3 mb-3"> Shedule class</h1>
+        <h1 class="h3 mb-3">Edit class</h1>
         <div class="row">
             <div class="col-12">
                 <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title mb-0"><b><?php echo $row1['courseId'] . "  : " . $row1['courseName'] ?></b></h3>
+                    </div>
                     <div class="card-body">
                         <form action="saveSheduleClass.php" method="post" class="scheduleClass">
-                            <input type="hidden" class="form-control" value="sheduleClass" name="form_id">
+                            <input type="hidden" class="form-control" value="editClass" name="form_id">
+                            <input type="hidden" class="form-control" value="<?php echo $row['id'] ?>" name="id">
+                            <input type="hidden" class="form-control" value="<?php echo $row1['courseId'] ?>" name="course">
                             <div class="row">
                                 <div class="col-12 col-lg-1"></div>
                                 <div class="col-12 col-lg-4">
                                     <div class="mb-2">
-                                        <label class="form-label"><b>Select Course </b></label>
-                                        <div class="input-group">
-                                            <select class="form-control course" id="course" name="course">
-                                                <option value="">Select a course</option>
-                                                <?php
-                                                $sql = $db->prepare("SELECT * FROM courses");
-                                                $sql->execute();
-                                                while ($row = $sql->fetch()) {;
-                                                ?>
-                                                    <option value="<?php echo $row['courseId'] ?>"><?php echo $row['courseName'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="mb-2">
                                         <label class="form-label"><b>Start Time</b></label>
                                         <div class="input-group">
-                                            <input type='time' class="form-control" name="startTime">
+                                            <input type='time' value="<?php echo $row['startTime'] ?>" class="form-control" name="startTime">
                                         </div>
                                     </div>
                                     <div class="mb-2">
                                         <label class="form-label"><b>Venue</b></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="venue" placeholder="e.g Online ">
+                                            <input type="text" value="<?php echo $row['venue'] ?>" class="form-control" name="venue">
                                         </div>
                                     </div>
                                 </div>
@@ -84,13 +84,13 @@ if (isset($_SESSION['error_msg'])) {
                                     <div class="mb-2">
                                         <label class="form-label"><b>Course Instructor</b></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="instructor" name="instructor" readonly>
+                                            <input type="text" class="form-control" value=" <?php echo $row1['instructor'] ?>" id=" instructor" name="instructor" readonly>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-1"></div>
                                 <div class="text-center mt-4">
-                                    <button type="submit" class="btn btn-lg btn-primary"> Schedule Class </button>
+                                    <button type="submit" class="btn btn-lg btn-primary"> Update Class </button>
                                 </div>
                             </div>
                         </form>

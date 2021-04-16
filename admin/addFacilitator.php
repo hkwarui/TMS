@@ -34,7 +34,7 @@ if (isset($_SESSION['error_msg'])) {
             <div class="col-12 col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="save_facilitator.php" method="post" id="add_facilitator">
+                        <form action="saveFacilitator.php" method="post" id="add_facilitator">
                             <input type="hidden" class="form-control" value="add_facilitator" name="form_id">
                             <div class="row">
                                 <div class="col-12 col-lg-1"></div>

@@ -2,13 +2,24 @@
 include_once('../includes/header.php');
 require_once '../includes/db_config.php';
 
-//DISPLAY A MESSAGE IF ANY 
+
+
+//DISPLAY SUCCESS MESSAGE IF ANY
 if (isset($_SESSION['msg'])) {
     echo '<div class="alert alert-success ml-5 p-1">';
     echo $_SESSION['msg'];
     unset($_SESSION['msg']);
     echo "</div>";
-} ?>
+};
+
+//DISPLAY ERROR MESSAGE IF ANY
+if (isset($_SESSION['error_msg'])) {
+    echo '<div class="alert alert-danger ml-5 p-1">';
+    echo $_SESSION['msg'];
+    unset($_SESSION['msg']);
+    echo "</div>";
+}
+?>
 
 <script>
     // HIDE MESSAGE AFTER 4 SECS
@@ -26,7 +37,7 @@ if (isset($_SESSION['msg'])) {
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-hover table-sm">
+                        <table class="table table-hover table-sm" id="myTable">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -43,10 +54,10 @@ if (isset($_SESSION['msg'])) {
                                 <?php
                                 $no = 1;
                                 //Load Classes info
-                                $sth = $db->prepare("SELECT * FROM facilitators ");
+                                $sth = $db->prepare("SELECT * FROM `facilitators`");
                                 $sth->execute();
-                                $row1 = $sth->fetch();
-                                if ($row1) {
+                                $count = $sth->rowCount();
+                                if ($count > 0) {
                                     while ($result = $sth->fetch()) {
                                 ?>
                                         <tr>
@@ -57,11 +68,11 @@ if (isset($_SESSION['msg'])) {
                                             <td><?php echo $result['phone']; ?></td>
                                             <td><?php echo $result['passport']; ?></td>
                                             <td><?php echo ucwords($result['company']); ?></td>
-                                            <td> <a href="http://"><i class="align-middle me-1" data-feather="edit-2"></i></a><a href="http://"><i class="align-middle me-1" data-feather="trash-2"></i></a> </td>
+                                            <td> <a href="editFacilitator.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a><a onclick="return confirm('Please confirm deletion');" href="deleteFacilitator.php?id=<?php echo $result['id']; ?>?username=<?php echo $result['username']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a> </td>
                                         </tr>
                                     <?php }
                                 }
-                                if (!$row1) { ?>
+                                if ($count <= 0) { ?>
                                     <tr>
                                         <td colspan="5"><b> No Scheduled classes in this Course !</b> </td>
                                     </tr>
@@ -92,6 +103,11 @@ if (isset($_SESSION['msg'])) {
 
 </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#myTable').dataTable({})
+    })
+</script>
 
 <script src="../static/js/app.js"></script>
 

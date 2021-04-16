@@ -1,7 +1,14 @@
 <?php
 include_once('../includes/header.php');
 require_once '../includes/db_config.php';
-//DISPLAY SUCCESS MESSAGE IF ANY
+
+//get info sent to this page
+$fac_id = $_GET['id'];
+$stm = $db->prepare("SELECT * FROM facilitators WHERE id = ?");
+$stm->execute([$fac_id]);
+$row = $stm->fetch();
+
+//DISPLAY SUCCESS MESSAGE IF ANY 
 if (isset($_SESSION['msg'])) {
     echo '<div class="alert alert-success ml-5 p-1">';
     echo $_SESSION['msg'];
@@ -9,7 +16,7 @@ if (isset($_SESSION['msg'])) {
     echo "</div>";
 };
 
-//DISPLAY ERROR MESSAGE IF ANY
+//DISPLAY ERROR MESSAGE IF ANY 
 if (isset($_SESSION['error_msg'])) {
     echo '<div class="alert alert-danger ml-5 p-1">';
     echo $_SESSION['msg'];
@@ -29,77 +36,68 @@ if (isset($_SESSION['error_msg'])) {
 
 <main class="content">
     <div class="container-fluid p-0">
-        <h1 class="h3 mb-3"> Shedule class</h1>
+        <h1 class="h3 mb-3">Update Facilitator Details</h1>
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="saveSheduleClass.php" method="post" class="scheduleClass">
-                            <input type="hidden" class="form-control" value="sheduleClass" name="form_id">
+                        <form action="saveFacilitator.php" method="post" id="add_facilitator">
+                            <input type="hidden" class="form-control" value="edit_facilitator" name="form_id">
+                            <input type="hidden" class="form-control" value='<?php echo $row['id']; ?> ' name="id">
                             <div class="row">
                                 <div class="col-12 col-lg-1"></div>
                                 <div class="col-12 col-lg-4">
                                     <div class="mb-2">
-                                        <label class="form-label"><b>Select Course </b></label>
+                                        <label class="form-label"><b>Username</b></label>
                                         <div class="input-group">
-                                            <select class="form-control course" id="course" name="course">
-                                                <option value="">Select a course</option>
-                                                <?php
-                                                $sql = $db->prepare("SELECT * FROM courses");
-                                                $sql->execute();
-                                                while ($row = $sql->fetch()) {;
-                                                ?>
-                                                    <option value="<?php echo $row['courseId'] ?>"><?php echo $row['courseName'] ?></option>
-                                                <?php } ?>
-                                            </select>
+                                            <input type="text" class="form-control" value="<?php echo $row['username'] ?>" name=" username" readonly>
                                         </div>
                                     </div>
                                     <div class="mb-2">
-                                        <label class="form-label"><b>Start Time</b></label>
+                                        <label class="form-label"><b>FullName</b></label>
                                         <div class="input-group">
-                                            <input type='time' class="form-control" name="startTime">
+                                            <input type="text" class="form-control" name="fullname" value="<?php echo $row['fullname'] ?>">
                                         </div>
                                     </div>
-                                    <div class="mb-2">
-                                        <label class="form-label"><b>Venue</b></label>
+                                    <div class=" mb-2">
+                                        <label class="form-label"><b>Email</b></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="venue" placeholder="e.g Online ">
+                                            <input type="email" class="form-control" value="<?php echo $row['email'] ?>" name=" email">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-2"></div>
-                                <?php
-                                $sql2 = $db->prepare("SELECT max(id) FROM cohorts");
-                                $sql2->execute();
-                                $row2 = $sql2->fetchColumn();
-                                $cohortId = $row2 + 1;
-                                ?>
                                 <div class="col-12 col-lg-4">
                                     <div class="mb-2">
-                                        <label class="form-label"><b>Cohort</b></label>
+                                        <label class="form-label"><b> Phone No.</b></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="cohort" value="<?php echo "Cohort-0" . $cohortId . "/" . date('Y') ?>" placeholder="e.g Cohort01/2021" readonly>
+                                            <input type="text" class="form-control" value="<?php echo $row['phone'] ?>" name=" phone">
                                         </div>
                                     </div>
                                     <div class="mb-2">
-                                        <label class="form-label"><b>Course Instructor</b></label>
+                                        <label class="form-label"><b>ID./Passport </b></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="instructor" name="instructor" readonly>
+                                            <input type="text" class="form-control" value="<?php echo $row['passport'] ?>" name=" passport">
+                                        </div>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label"><b>Company</b></label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" value="<?php echo $row['company'] ?>" name=" company">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-1"></div>
                                 <div class="text-center mt-4">
-                                    <button type="submit" class="btn btn-lg btn-primary"> Schedule Class </button>
+                                    <button type="submit" class="btn btn-lg btn-primary"> Update </button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </div>
+        </div>
 </main>
 
 <footer class="footer">
@@ -118,38 +116,48 @@ if (isset($_SESSION['error_msg'])) {
 
 </div>
 </div>
+
+
 <script>
+    // VALIDATE FACILITATOR ADD FORM
     $(document).ready(function() {
-        // Populate Instructor field when you select a course
-        $('.course').on("change", function(e) {
-            e.preventDefault();
-            var courseId = $(this).val();
-
-            $.ajax({
-                url: 'loadData.php',
-                method: 'post',
-                data: {
-                    courseId: courseId
-                },
-                dataType: 'json',
-                success: function(data) {
-                    $('#instructor').val(data['instructor'])
-                },
-                error: function(data) {
-                    console.log(data);
-                }
-
-            })
-        });
-        // Validate schedule class form 
-
-        $('.scheduleClass').validate({
+        $('#add_facilitator').validate({
             rules: {
-                course: 'required',
-                startTime: 'required',
-                venue: 'required',
-                cohort: 'required',
-                instructor: 'required',
+                username: {
+                    required: true,
+                    minlength: 3,
+                    remote: {
+                        url: "check_username.php",
+                        type: "post",
+                        data: {
+                            username: function() {
+                                return $("#username").val();
+                            }
+                        },
+                        dataType: 'json'
+                    },
+                },
+                fullname: 'required',
+                email: {
+                    required: true,
+                    email: true
+                },
+                phone: {
+                    required: true,
+                    digits: true,
+                    minlength: 10,
+                    maxlength: 12
+                },
+                passport: {
+                    required: true,
+                    digits: true
+                },
+                company: 'required'
+            },
+            messages: {
+                username: {
+                    remote: "Username is already taken"
+                }
             },
             errorElement: 'span',
             errorPlacement: function(error, element) {
@@ -165,8 +173,8 @@ if (isset($_SESSION['error_msg'])) {
             submitHandler: function(form) {
                 form.submit();
             }
-        })
 
+        })
     })
 </script>
 
@@ -174,4 +182,4 @@ if (isset($_SESSION['error_msg'])) {
 
 </body>
 
-</html>
+</html
