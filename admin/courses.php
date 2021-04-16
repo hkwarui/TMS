@@ -30,7 +30,15 @@ if (isset($_SESSION['error_msg'])) {
 
 <main class="content">
     <div class="container-fluid p-0">
-        <h1 class="h3 mb-3">Courses </h1>
+
+        <div class="row">
+            <div class="col-10">
+                <h1 class="h3 mb-3">Courses </h1>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-sm btn-primary float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
+            </div>
+        </div>
 
         <div class="row mb-5">
             <div class="col-12 col-lg-3"></div>
@@ -133,9 +141,6 @@ if (isset($_SESSION['error_msg'])) {
         })
     })
 </script>
-
-<script src="../static/js/app.js"></script>
-
 </body>
 
 </html>

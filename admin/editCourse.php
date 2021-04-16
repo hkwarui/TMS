@@ -178,11 +178,6 @@ if (isset($_SESSION['error_msg'])) {
         })
     })
 </script>
-
-
-
-<script src="../static/js/app.js"></script>
-
 </body>
 
 </html>

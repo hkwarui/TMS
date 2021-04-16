@@ -22,15 +22,20 @@ if (isset($_SESSION['error_msg'])) {
 
 if (isset($_GET['id'])) {
 
+    $courseId = $_GET['cid'];
+    $cohortId = $_GET['id'];
     // Load courses info
-    $courseId = $_GET['id'];
+
     $stm = $db->prepare("SELECT * FROM courses WHERE courseId= ?");
     $stm->execute([$courseId]);
     $row = $stm->fetch();
+
+    //Load cohorts info
+
+    $stm1 = $db->prepare("SELECT * FROM cohorts WHERE cohortId= ?");
+    $stm1->execute([$cohortId]);
+    $row1 = $stm1->fetch();
 }
-
-
-
 ?>
 
 <script>
@@ -44,27 +49,25 @@ if (isset($_GET['id'])) {
 
 <main class="content">
     <div class="container-fluid p-0">
-        <h1 class="h3 mb-3  float-right"><?php echo $row['courseId'] . ": " . $row['courseName'] ?></h1>
+        <h1 class="h3 mb-3  float-right">Class: <?php echo $cohortId; ?></h1>
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title  mb-0">Course Details</h5>
+                        <h5 class="card-title  mb-0"><?php echo $row['courseId'] . "  " . $row['courseName'] ?></h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 col-lg-3">
-                                <span><i class="align-middle me-1" data-feather="clock"></i> <?php echo $row['duration'] ?> Hours To complete the Course.</span>
+                                <span><i class="align-middle me-1" data-feather="clock"></i> <?php echo $row1['startTime'] ?> Hrs.</span>
                             </div>
                             <div class="col-12 col-lg-3">
                                 <span><i class="align-middle me-1" data-feather="user-check"></i> Taught by <?php echo ucwords($row['instructor']) ?></span>
                             </div>
                             <div class="col-12 col-lg-2">
-                                <span><i class="align-middle me-1" data-feather="activity"></i> Valid for <?php echo $row['validity'] ?> Years.</span>
+                                <span><i class="align-middle me-1" data-feather="home"></i> <?php echo $row1['venue'] ?> </span>
                             </div>
-                            <div class="col-12 col-lg-2">
-                                <span><i class="align-middle me-1" data-feather="shopping-cart"></i>Cost: <?php echo  $row['cost'] != 0 ? " Ksh. " . $row['cost']  :  " Free"; ?> </span>
-                            </div>
+
                             <div class="col-12 col-lg-2">
                                 <span> <a title="Edit" href="editCourse.php?id=<?php echo $row['courseId'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a><a onclick="return confirm('Please confirm deletion');" title="Delete" href="deleteCourse.php?id=<?php echo $row['id']; ?>?coz_id=<?php echo $row['courseId']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a> </span>
                             </div>
@@ -74,16 +77,19 @@ if (isset($_GET['id'])) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Sheduled Classes </h5>
+                            <h5 class="card-title mb-0">Participants</h5>
                         </div>
                         <div class="card-body">
                             <table class="table table-hover table-sm" id="myTable">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Class Name</th>
-                                        <th scope="col">Time</th>
-                                        <th scope="col">Venue</th>
+                                        <th scope="col">FullName</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">ID/Passport</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">Designation</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -91,24 +97,27 @@ if (isset($_GET['id'])) {
                                     <?php
                                     $no = 1;
                                     //Load Classes info
-                                    $sth = $db->prepare("SELECT * FROM cohorts WHERE courseId = ?");
-                                    $sth->execute([$courseId]);
+                                    $sth = $db->prepare("SELECT * FROM participants WHERE cohortId = ?");
+                                    $sth->execute([$cohortId]);
                                     $count = $sth->rowCount();
                                     if ($count > 0) {
                                         while ($result = $sth->fetch()) {
                                     ?>
                                             <tr>
                                                 <th scope="row"><?php echo $no++; ?></th>
-                                                <td><?php echo $result['cohortId']; ?></td>
-                                                <td><?php echo $result['startTime']; ?></td>
-                                                <td><?php echo $result['venue']; ?></td>
+                                                <td><?php echo $result['fullname']; ?></td>
+                                                <td><?php echo $result['email']; ?></td>
+                                                <td><?php echo $result['phone']; ?></td>
+                                                <td><?php echo $result['passport']; ?></td>
+                                                <td><?php echo $result['company']; ?></td>
+                                                <td><?php echo $result['designation']; ?></td>
                                                 <td> <a title="Edit" href="editClass.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a><a onclick="return confirm('Please confirm deletion');" title="Delete" href="deleteClass.php?id=<?php echo $result['id']; ?>?coz_id=<?php echo $result['courseId']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a> </td>
                                             </tr>
                                         <?php }
                                     }
                                     if ($count <= 0) { ?>
                                         <tr>
-                                            <td colspan="5"> No Scheduled classes in this Course ! </td>
+                                            <td colspan="8"> No Participants in this Class ! </td>
                                         </tr>
                                     <?php   } ?>
                                 </tbody>
@@ -138,9 +147,6 @@ if (isset($_GET['id'])) {
 
 </div>
 </div>
-
-<script src="../static/js/app.js"></script>
-
 </body>
 
 </html>

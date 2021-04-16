@@ -2,7 +2,6 @@
 include_once('../includes/header.php');
 require_once '../includes/db_config.php';
 
-
 //DISPLAY SUCCESS MESSAGE IF ANY
 if (isset($_SESSION['msg'])) {
     echo '<div class="alert alert-success ml-5 p-1">';
@@ -19,7 +18,6 @@ if (isset($_SESSION['error_msg'])) {
     echo "</div>";
 }
 
-
 if (isset($_GET['id'])) {
 
     // Load courses info
@@ -28,9 +26,6 @@ if (isset($_GET['id'])) {
     $stm->execute([$courseId]);
     $row = $stm->fetch();
 }
-
-
-
 ?>
 
 <script>
@@ -44,11 +39,19 @@ if (isset($_GET['id'])) {
 
 <main class="content">
     <div class="container-fluid p-0">
-        <h1 class="h3 mb-3  float-right"><?php echo $row['courseId'] . ": " . $row['courseName'] ?></h1>
+        <div class="row">
+            <div class="col-10">
+                <h1 class="h3 mb-3  float-right"><?php echo $row['courseId'] . ": " . $row['courseName'] ?>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-sm btn-primary float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header ">
                         <h5 class="card-title  mb-0">Course Details</h5>
                     </div>
                     <div class="card-body">
@@ -102,7 +105,7 @@ if (isset($_GET['id'])) {
                                                 <td><?php echo $result['cohortId']; ?></td>
                                                 <td><?php echo $result['startTime']; ?></td>
                                                 <td><?php echo $result['venue']; ?></td>
-                                                <td><a title="View" href="viewClass.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="eye"></i></a><a title="Edit" href="editClass.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a><a onclick="return confirm('Please confirm deletion');" title="Delete" href="deleteClass.php?id=<?php echo $result['id']; ?>?coz_id=<?php echo $result['courseId']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a> </td>
+                                                <td><a title="View" href="viewClass.php?id=<?php echo $result['cohortId'] ?>&cid=<?php echo $row['courseId'] ?>"><i class="align-middle me-1" data-feather="eye"></i></a><a title="Edit" href="editClass.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a><a onclick="return confirm('Please confirm deletion');" title="Delete" href="deleteClass.php?id=<?php echo $result['id']; ?>?coz_id=<?php echo $result['courseId']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a> </td>
                                             </tr>
                                         <?php }
                                     }
@@ -138,8 +141,6 @@ if (isset($_GET['id'])) {
 
 </div>
 </div>
-
-<script src="../static/js/app.js"></script>
 
 </body>
 

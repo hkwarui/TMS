@@ -61,9 +61,6 @@ if (isset($_SESSION['error_msg'])) {
 
 </div>
 </div>
-
-<script src="../static/js/app.js"></script>
-
 </body>
 
 </html>

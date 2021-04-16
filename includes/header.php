@@ -61,7 +61,6 @@ require_once "../admin/auth.php";
                                 <li class="sidebar-item"><a class="sidebar-link" href="addCourse.php">Add Course</a></li>
                                 <li class="sidebar-item"><a class="sidebar-link" href="courses.php">View Courses</a></li>
                                 <li class="sidebar-item"><a class="sidebar-link" href="sheduleClass.php">Shedule Class</a></li>
-                                <li class="sidebar-item"><a class="sidebar-link" href="viewClass.php">View Class</a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item">
@@ -120,7 +119,7 @@ require_once "../admin/auth.php";
                                 <img src="../static/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark"><?php echo ucfirst($username); ?></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+                                <a class="dropdown-item" href="../admin/profile.php"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="../logout.php">Log out</a>
                             </div>
