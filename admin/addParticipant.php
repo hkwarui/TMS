@@ -2,6 +2,15 @@
 include_once('../includes/header.php');
 require_once '../includes/db_config.php';
 
+//check if values of course and cohort are set
+if (isset($_GET['cid']) &&  isset($_GET['id'])) {
+    $courseId = $_GET['cid'];
+    $cohortId = $_GET['id'];
+    $q = $db->prepare("SELECT courseName FROM courses WHERE courseId =?");
+    $q->execute([$courseId]);
+    $coz = $q->fetch();
+}
+
 //DISPLAY SUCCESS MESSAGE IF ANY
 if (isset($_SESSION['msg'])) {
     echo '<div class="alert alert-success ml-5 p-1">';
@@ -92,14 +101,18 @@ if (isset($_SESSION['error_msg'])) {
                                         <label class="form-label"><b>Select Course</b></label>
                                         <div class="input-group">
                                             <select class="form-control course" name="course">
-                                                <option value="">Select a course</option>
-                                                <?php
-                                                $sql =  $db->prepare('SELECT courseName, courseId FROM courses');
-                                                $sql->execute();
-                                                while ($row = $sql->fetch()) {
-                                                ?>
-                                                    <option value="<?php echo $row['courseId']; ?>"> <?php echo $row['courseName']; ?></option>
-                                                <?php } ?>
+                                                <?php if ($courseId) { ?>
+                                                    <option value="<?php echo $courseId ?>" readonly><?php echo $coz['courseName'] ?></option>
+                                                <?php } else { ?>
+                                                    <option value="">Select a course</option>
+                                                    <?php
+                                                    $sql =  $db->prepare('SELECT courseName, courseId FROM courses');
+                                                    $sql->execute();
+                                                    while ($row = $sql->fetch()) {
+                                                    ?>
+                                                        <option value="<?php echo $row['courseId']; ?>"> <?php echo $row['courseName']; ?></option>
+                                                <?php }
+                                                } ?>
                                             </select>
                                         </div>
                                     </div>
@@ -107,7 +120,11 @@ if (isset($_SESSION['error_msg'])) {
                                         <label class="form-label"><b>Select Class</b></label>
                                         <div class="input-group">
                                             <select class="form-control" id="cohort" name="cohort">
-                                                <option value="">Select a class</option>
+                                                <?php if ($courseId) { ?>
+                                                    <option value="<?php echo $cohortId ?>" readonly><?php echo $cohortId ?></option>
+                                                <?php } else { ?>
+                                                    <option value="">Select a class</option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>

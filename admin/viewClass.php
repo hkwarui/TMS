@@ -1,8 +1,11 @@
 <?php
 include_once('../includes/header.php');
-require_once '../includes/db_config.php';
+require_once '../includes/db_config.php'; ?>
 
+<span id="alertMsg">
+</span>
 
+<?php
 //DISPLAY SUCCESS MESSAGE IF ANY
 if (isset($_SESSION['msg'])) {
     echo '<div class="alert alert-success ml-5 p-1">';
@@ -49,7 +52,16 @@ if (isset($_GET['id'])) {
 
 <main class="content">
     <div class="container-fluid p-0">
-        <h1 class="h3 mb-3  float-right">Class: <?php echo $cohortId; ?></h1>
+
+        <div class="row">
+            <div class="col-10">
+                <h1 class="h3 mb-3  float-right">Class: <?php echo $cohortId; ?></h1>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-sm btn-primary float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -58,10 +70,10 @@ if (isset($_GET['id'])) {
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-12 col-lg-3">
+                            <div class="col-12 col-lg-2">
                                 <span><i class="align-middle me-1" data-feather="clock"></i> <?php echo $row1['startTime'] ?> Hrs.</span>
                             </div>
-                            <div class="col-12 col-lg-3">
+                            <div class="col-12 col-lg-2">
                                 <span><i class="align-middle me-1" data-feather="user-check"></i> Taught by <?php echo ucwords($row['instructor']) ?></span>
                             </div>
                             <div class="col-12 col-lg-2">
@@ -82,8 +94,10 @@ if (isset($_GET['id'])) {
                             <div class="col-12 col-lg-2">
                                 <span><i class="align-middle me-1" data-feather="home"></i> <?php echo $row1['venue'] ?> </span>
                             </div>
-                            <div class="col-12 col-lg-2">
-                                <span> <a title="Edit" href="editCourse.php?id=<?php echo $row['courseId'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a><a onclick="return confirm('Please confirm deletion');" title="Delete" href="deleteCourse.php?id=<?php echo $row['id']; ?>?coz_id=<?php echo $row['courseId']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a> </span>
+                            <div class="col-12 col-lg-4">
+                                <button class="btn btn-sm btn-primary" id="inProgress"><i class="align-middle me-1" data-feather="loader"></i>InProgres</button>
+                                <button class="btn btn-sm btn-primary" id="done"><i class="align-middle me-1" data-feather="check-circle"></i>Done</button>
+                                <button class="btn btn-sm btn-primary" id="cancelled"><i class="align-middle me-1" data-feather="alert-triangle"></i>Cancelled</button>
                             </div>
 
                         </div>
@@ -96,10 +110,14 @@ if (isset($_GET['id'])) {
                                 <div class="col-6">
                                     <h5 class="card-title mb-0">Participants Record</h5>
                                 </div>
-                                <div class="col-6">
-                                    <button class="btn btn-sm btn-primary" id="completed" type="submit">Completed</button>
-                                    <button class="btn btn-sm btn-primary" id="pass" type="submit">Pass</button>
-                                    <button class="btn btn-sm btn-primary" id="fail" type="submit">Fail</button>
+                                <div class="col-4">
+                                    <input type="hidden" id="courseId" value="<?php echo $courseId ?>">
+                                    <button class="btn btn-sm btn-primary" id="completed" type="submit"><i class="align-middle me-1" data-feather="award"></i>Completed</button>
+                                    <button class="btn btn-sm btn-primary" id="pass" type="submit"><i class="align-middle me-1" data-feather="user-check"></i>Pass</button>
+                                    <button class="btn btn-sm btn-primary" id="fail" type="submit"><i class="align-middle me-1" data-feather="user-x"></i>Fail</button>
+                                </div>
+                                <div class="col-2">
+                                    <a href="addParticipant.php?cid=<?php echo $courseId ?>&&id=<?php echo $cohortId ?>"> <button class="btn btn-sm btn-primary" id="completed" type="submit"><i class="align-middle me-1" data-feather="plus"></i>Add</button></a>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +126,7 @@ if (isset($_GET['id'])) {
                                 <table class="table table-responsive table-hover table-sm">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
+                                            <th scope="col"><input type="checkbox" id="checkAll"> </th>
                                             <th scope="col">FullName</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">Phone</th>
@@ -139,22 +157,20 @@ if (isset($_GET['id'])) {
                                                     <td><?php echo $result['company']; ?></td>
                                                     <td><?php echo $result['designation']; ?></td>
                                                     <td><?php if ($result['completion'] == 'completed') {
-                                                            echo '<span class="badge bg-success">' . $result['completion'] . '</span>';
+                                                            echo '<span class="badge bg-success">' . ucwords($result['completion']) . '</span>';
                                                         }
                                                         if ($result['completion'] == 'incomplete') {
-                                                            echo '<span class="badge bg-secondary
-                                                            
-                                                            ">' . $result['completion'] . '</span>';
+                                                            echo '<span class="badge bg-secondary">' . ucwords($result['completion']) . '</span>';
                                                         }
                                                         ?></td>
                                                     <td><?php if (!$result['perfomance']) {
                                                             echo "-------";
                                                         };
                                                         if ($result['perfomance'] == 'fail') { ?>
-                                                            <span class='badge bg-danger'> <?php echo $result['perfomance']; ?> </span>
+                                                            <span class='badge bg-danger'> <?php echo ucwords($result['perfomance']); ?> </span>
                                                         <?php  };
                                                         if ($result['perfomance'] == 'pass') { ?>
-                                                            <span class='badge bg-success'><?php echo $result['perfomance']; ?> </span>
+                                                            <span class='badge bg-success'><?php echo ucwords($result['perfomance']); ?> </span>
                                                         <?php }; ?>
                                                     </td>
                                                 </tr>
@@ -162,7 +178,7 @@ if (isset($_GET['id'])) {
                                         }
                                         if ($count <= 0) { ?>
                                             <tr>
-                                                <td colspan="8"> No Participants in this Class ! </td>
+                                                <td colspan="9"> No Participants in this Class ! </td>
                                             </tr>
                                         <?php   } ?>
                                     </tbody>
@@ -192,6 +208,36 @@ if (isset($_GET['id'])) {
 </footer>
 <script>
     $(document).ready(function() {
+
+        // mark class in progress
+        $('#inProgress, #done ,#cancelled').on('click', function() {
+            var status = $(this).attr('id');
+            var courseId = $('#courseId').val()
+            console.log(courseId);
+            console.log(status);
+            $.ajax({
+                url: 'changeStatus.php',
+                method: 'post',
+                data: {
+                    courseId,
+                    status
+                },
+                success: function(data) {
+                    $('#alertMsg').html('<div class="alert alert-success ml-5 p-1">Class status updated</div>');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 4000);
+                },
+                error: function(data) {
+                    $('#alertMsg').html('<div class="alert alert-danger ml-5 p-1">Class status failed to update</div>');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 4000)
+                }
+            })
+        })
+
+        // mark completed
         $('#completed').on('click', function() {
             console.log("Completed button clicked ");
             var selectedUser = new Array();
@@ -205,15 +251,31 @@ if (isset($_GET['id'])) {
                 data: {
                     data: selectedUser
                 },
-                success: function(data) {
-                    console.log(data);
-                    location.reload();
+                success: function(res) {
+                    console.log(res);
+                    if (res == 1) {
+                        $('#alertMsg').html('<div class="alert alert-success ml-5 p-1">Completion status updated</div>');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 4000);
+                    }
+                    if (res == 2) {
+                        $('#alertMsg').html('<div class="alert alert-danger ml-5 p-1">No checkbox selected</div>');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 4000)
+                    }
                 },
                 error: function(data) {
-                    console.log(data.responseText)
+                    $('#alertMsg').html('<div class="alert alert-danger ml-5 p-1">No checkbox selected</div>');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 4000)
                 }
             })
         });
+
+        //Mark passed
         $('#pass').on('click', function(e) {
             e.preventDefault();
 
@@ -229,16 +291,28 @@ if (isset($_GET['id'])) {
                 data: {
                     data: selectedUser
                 },
-                success: function(data) {
-                    console.log(data);
-                    location.reload();
-
+                success: function(res) {
+                    console.log(res);
+                    if (res == 1) {
+                        $('#alertMsg').html('<div class="alert alert-success ml-5 p-1">Performance status updated</div>');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 4000);
+                    }
+                    if (res == 2) {
+                        $('#alertMsg').html('<div class="alert alert-danger ml-5 p-1">No checkbox selected</div>');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 4000)
+                    }
                 },
                 error: function(data) {
                     console.log(data.responseText)
                 }
             })
         });
+
+        // mark failed
         $('#fail').on('click', function() {
             console.log("fail button clicked ");
             var selectedUser = new Array();
@@ -252,16 +326,31 @@ if (isset($_GET['id'])) {
                 data: {
                     data: selectedUser
                 },
-                dataType: 'json',
-                success: function(data) {
-                    console.log(data);
-                    location.reload();
+                success: function(res) {
+                    console.log(res);
+                    if (res == 1) {
+                        $('#alertMsg').html('<div class="alert alert-success ml-5 p-1">Performance status updated</div>');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 4000);
+                    }
+                    if (res == 2) {
+                        $('#alertMsg').html('<div class="alert alert-danger ml-5 p-1">No checkbox selected</div>');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 4000)
+                    }
                 },
                 error: function(data) {
                     console.log(data.responseText);
                 }
             })
         })
+
+        //Select all participants
+        $('#checkAll').click(function() {
+            $('input:checkbox').prop('checked', this.checked);
+        });
     })
 </script>
 </div>

@@ -8,8 +8,8 @@ $coz_id = $_GET['coz_id'];
 $result = $db->prepare("DELETE FROM cohorts WHERE id= ?");
 
 if ($result->execute([$id])) {
-    $_SESSION['msg'] = 'Facilitator Deleted !';
-    header("location: viewCourse.php?=" . $coz_id);
+    $_SESSION['msg'] = 'Class Deleted !';
+    header("location: viewCourse.php?id=" . $coz_id);
     exit;
 } else {
     $_SESSION['error_msg'] = 'Delete Action Failed !';

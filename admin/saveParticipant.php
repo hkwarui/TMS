@@ -25,12 +25,12 @@ if ($form_id === "addParticipant") {
 
     if (($q->execute(array(':a' => $a, ':b' => $b, ':c' => $c, ':d' => $d, ':e' => $e, ':f' => $f, ':g' => $g, ':h' => $h))) &&   ($q1->execute(array(':d' => $d, ':g' => $g, ':h' => $h)))) {
         $_SESSION['msg'] = 'New Participant successfully created!';
-        header("location:viewParticipants.php");
+        header("location:viewClass.php?id=" . $h . "&&cid=" . $g);
         exit;
     } else {
 
         $_SESSION['error_msg'] = 'User Creation Failed!';
-        header("location:viewParticipants.php");
+        header("location:viewClass.php?id=" . $h . "&&cid=" . $g);
         exit;
     }
 }
