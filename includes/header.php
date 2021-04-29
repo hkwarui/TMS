@@ -36,7 +36,7 @@ require_once "../admin/auth.php";
                         Pages
                     </li>
                     <?php
-                    if (isInstuctor()) {
+                    if (isInstructor()) {
                     ?>
 
                         <li class="sidebar-item">

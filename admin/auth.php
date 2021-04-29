@@ -8,7 +8,7 @@ if (!$_SESSION['role_id'] || !$_SESSION['login_status']) {
 $username = $_SESSION['username'];
 
 //CHECK IF USER IS INSTRUCTOR
-function isInstuctor()
+function isInstructor()
 {
     if ($_SESSION['role_id'] == 1) {
         return true;
@@ -16,6 +16,7 @@ function isInstuctor()
         return false;
     }
 };
+
 
 //CHECK IF USER IS INSTRUCTOR
 function isFacilitator()

@@ -40,6 +40,10 @@ include_once("login.php");
                                     <form method="post">
                                         <div class="mb-2">
                                             <?php
+                                            if (isset($_SESSION['error_msg'])) {
+                                                echo $_SESSION['error_msg'];
+                                                unset($_SESSION['error_msg']);
+                                            }
                                             if (isset($msg)) {
                                                 echo $msg;
                                                 unset($msg);
