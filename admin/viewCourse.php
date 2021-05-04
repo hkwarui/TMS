@@ -69,7 +69,9 @@ if (isset($_GET['id'])) {
                                 <span><i class="align-middle me-1" data-feather="shopping-cart"></i>Cost: <?php echo  $row['cost'] != 0 ? " Ksh. " . $row['cost']  :  " Free"; ?> </span>
                             </div>
                             <div class="col-12 col-lg-2">
-                                <span> <a title="Edit" href="editCourse.php?id=<?php echo $row['courseId'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a><a onclick="return confirm('Please confirm deletion');" title="Delete" href="deleteCourse.php?id=<?php echo $row['id']; ?>?coz_id=<?php echo $row['courseId']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a> </span>
+                                <?php if (isInstructor()) { ?>
+                                    <span> <a title="Edit" href="editCourse.php?id=<?php echo $row['courseId'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a><a onclick="return confirm('Please confirm deletion');" title="Delete" href="deleteCourse.php?id=<?php echo $row['id']; ?>?coz_id=<?php echo $row['courseId']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a> </span>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -105,7 +107,13 @@ if (isset($_GET['id'])) {
                                                 <td><?php echo $result['cohortId']; ?></td>
                                                 <td><?php echo $result['startTime']; ?></td>
                                                 <td><?php echo $result['venue']; ?></td>
-                                                <td><a title="View" href="viewClass.php?id=<?php echo $result['cohortId'] ?>&cid=<?php echo $row['courseId'] ?>"><i class="align-middle me-1" data-feather="eye"></i></a><a title="Edit" href="editClass.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a><a onclick="return confirm('Please confirm deletion');" title="Delete" href="deleteClass.php?id=<?php echo $result['id']; ?>&&coz_id=<?php echo $result['courseId']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a> </td>
+                                                <td>
+                                                    <a title="View" href="viewClass.php?id=<?php echo $result['cohortId'] ?>&cid=<?php echo $row['courseId'] ?>"><i class="align-middle me-1" data-feather="eye"></i></a>
+                                                    <?php if (isInstructor()) { ?>
+                                                        <a title="Edit" href="editClass.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a>
+                                                        <a onclick="return confirm('Please confirm deletion');" title="Delete" href="deleteClass.php?id=<?php echo $result['id']; ?>&&coz_id=<?php echo $result['courseId']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a>
+                                                    <?php } ?>
+                                                </td>
                                             </tr>
                                         <?php }
                                     }

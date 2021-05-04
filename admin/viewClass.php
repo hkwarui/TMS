@@ -95,9 +95,11 @@ if (isset($_GET['id'])) {
                                 <span><i class="align-middle me-1" data-feather="home"></i> <?php echo $row1['venue'] ?> </span>
                             </div>
                             <div class="col-12 col-lg-4">
-                                <button class="btn btn-sm btn-primary" id="inProgress"><i class="align-middle me-1" data-feather="loader"></i>InProgres</button>
-                                <button class="btn btn-sm btn-primary" id="done"><i class="align-middle me-1" data-feather="check-circle"></i>Done</button>
-                                <button class="btn btn-sm btn-primary" id="cancelled"><i class="align-middle me-1" data-feather="alert-triangle"></i>Cancelled</button>
+                                <?php if (isInstructor()) {  ?>
+                                    <button class="btn btn-sm btn-primary" id="inProgress"><i class="align-middle me-1" data-feather="loader"></i>InProgres</button>
+                                    <button class="btn btn-sm btn-primary" id="done"><i class="align-middle me-1" data-feather="check-circle"></i>Done</button>
+                                    <button class="btn btn-sm btn-primary" id="cancelled"><i class="align-middle me-1" data-feather="alert-triangle"></i>Cancelled</button>
+                                <?php } ?>
                             </div>
 
                         </div>
@@ -111,10 +113,12 @@ if (isset($_GET['id'])) {
                                     <h5 class="card-title mb-0">Participants Record</h5>
                                 </div>
                                 <div class="col-4">
-                                    <input type="hidden" id="courseId" value="<?php echo $courseId ?>">
-                                    <button class="btn btn-sm btn-primary" id="completed" type="submit"><i class="align-middle me-1" data-feather="award"></i>Completed</button>
-                                    <button class="btn btn-sm btn-primary" id="pass" type="submit"><i class="align-middle me-1" data-feather="user-check"></i>Pass</button>
-                                    <button class="btn btn-sm btn-primary" id="fail" type="submit"><i class="align-middle me-1" data-feather="user-x"></i>Fail</button>
+                                    <?php if (isInstructor()) { ?>
+                                        <input type="hidden" id="courseId" value="<?php echo $courseId ?>">
+                                        <button class="btn btn-sm btn-primary" id="completed" type="submit"><i class="align-middle me-1" data-feather="award"></i>Completed</button>
+                                        <button class="btn btn-sm btn-primary" id="pass" type="submit"><i class="align-middle me-1" data-feather="user-check"></i>Pass</button>
+                                        <button class="btn btn-sm btn-primary" id="fail" type="submit"><i class="align-middle me-1" data-feather="user-x"></i>Fail</button>
+                                    <?php } ?>
                                 </div>
                                 <div class="col-2">
                                     <a href="addParticipant.php?cid=<?php echo $courseId ?>&&id=<?php echo $cohortId ?>"> <button class="btn btn-sm btn-primary" id="completed" type="submit"><i class="align-middle me-1" data-feather="plus"></i>Add</button></a>
