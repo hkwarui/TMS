@@ -15,9 +15,9 @@ require_once "../admin/auth.php";
     <title>TMS </title>
     <link href="../static/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css"> -->
     <script src="../static/js/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <!-- <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script> -->
     <script src="../static/js/jquery.validate.min.js"></script>
     <script src="../static/js/app.js"></script>
 
@@ -38,7 +38,6 @@ require_once "../admin/auth.php";
                     <?php
                     if (isInstructor()) {
                     ?>
-
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="index.php">
                                 <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
@@ -76,7 +75,7 @@ require_once "../admin/auth.php";
                     if (isFacilitator()) {
                     ?>
                         <li class="sidebar-item active">
-                            <a class="sidebar-link" href="home.php">
+                            <a class="sidebar-link" href="index.php">
                                 <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                             </a>
                         </li>
@@ -94,7 +93,7 @@ require_once "../admin/auth.php";
                             </a>
                             <ul id="participant" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
                                 <li class="sidebar-item"><a class="sidebar-link" href="addParticipant.php">Add Participant</a></li>
-                                <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Manage Participant</a></li>
+                                <li class="sidebar-item"><a class="sidebar-link" href="viewParticipants.php">Manage Participant</a></li>
                             </ul>
                         </li>
                     <?php } ?>

@@ -24,7 +24,7 @@ if (isset($_SESSION['error_msg'])) {
     $(function() {
         setTimeout(function() {
             $(".alert").hide('slow');
-        }, 6000);
+        }, 4000);
     });
 </script>
 
@@ -72,7 +72,8 @@ if (isset($_SESSION['error_msg'])) {
                                 <h5 class="card-title mb-0">Public info</h5>
                             </div>
                             <div class="card-body">
-                                <form>
+                                <form action="saveProfile.php" method="post">
+                                    <input type="hidden" name="form_id" value="public_info">
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="mb-3">
@@ -110,12 +111,7 @@ if (isset($_SESSION['error_msg'])) {
                                 <form id='profile_info' method="post" action="saveProfile.php">
                                     <input type="hidden" class="form-control" name="form_id" value="profile_info">
                                     <input type="hidden" class="form-control" name="username" value="<?php echo $username ?>">
-                                    <input type="hidden" class="form-control" name="role_id" value="<?php if (isFacilitator()) {
-                                                                                                        echo 2;
-                                                                                                    }
-                                                                                                    if (isInstructor()) {
-                                                                                                        echo 2;
-                                                                                                    } ?>">
+
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label" for="FirstName">First name</label>
@@ -156,9 +152,9 @@ if (isset($_SESSION['error_msg'])) {
                                         <div class="mb-3 col-md-6">
                                             <label class=" form-label" for="company">Company</label>
                                             <div class="input-group">
-                                                <input type="text" name="company" class="form-control" value="<?php if (isset($row['company'])) {
-                                                                                                                    echo $row['company'];
-                                                                                                                }; ?>">
+                                                <input type="text" name="company" readonly class="form-control" value="<?php if (isset($row['company'])) {
+                                                                                                                            echo $row['company'];
+                                                                                                                        }; ?>">
                                             </div>
                                         </div>
                                         <div class="mb-3 col-md-6">

@@ -87,9 +87,16 @@ if (isset($_SESSION['error_msg'])) {
                                 <div class="col-12 col-lg-4">
                                     <div class="mb-2">
                                         <label class="form-label"><b>Company</b></label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="company" placeholder="e.g  Sharp Technologie ltd.">
-                                        </div>
+                                        <?php if (isFacilitator()) { ?>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="<?php echo $company['company'] ?>" name="company" readonly>
+                                            </div>
+                                        <?php }
+                                        if (isInstructor()) { ?>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="company" placeholder="e.g  Sharp Technologie ltd.">
+                                            </div>
+                                        <?php } ?>
                                     </div>
                                     <div class="mb-2">
                                         <label class="form-label"><b>Designation</b></label>

@@ -144,9 +144,14 @@ if (isset($_GET['id'])) {
                                     <tbody>
                                         <?php
                                         $no = 1;
-                                        //Load Classes info
-                                        $sth = $db->prepare("SELECT * FROM participants WHERE cohortId = ?");
-                                        $sth->execute([$cohortId]);
+                                        if (isInstructor()) {
+                                            $sth = $db->prepare("SELECT * FROM participants WHERE cohortId = ?");
+                                            $sth->execute([$cohortId]);
+                                        }
+                                        if (isFacilitator()) {
+                                            $sth = $db->prepare("SELECT * FROM participants WHERE cohortId = ? AND company = ?");
+                                            $sth->execute([$cohortId, $company['company']]);
+                                        }
                                         $count = $sth->rowCount();
                                         if ($count > 0) {
                                             while ($result = $sth->fetch()) {
@@ -336,13 +341,13 @@ if (isset($_GET['id'])) {
                         $('#alertMsg').html('<div class="alert alert-success ml-5 p-1">Performance status updated</div>');
                         setTimeout(function() {
                             location.reload();
-                        }, 4000);
+                        }, 100);
                     }
                     if (res == 2) {
                         $('#alertMsg').html('<div class="alert alert-danger ml-5 p-1">No checkbox selected</div>');
                         setTimeout(function() {
                             location.reload();
-                        }, 4000)
+                        }, 100)
                     }
                 },
                 error: function(data) {

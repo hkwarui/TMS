@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once 'auth.php';
 require_once '../includes/db_config.php';
 
 $form_id = $_POST['form_id'];
@@ -75,26 +75,53 @@ if ($form_id === "profile_info") {
     $b = $_POST['username'];
     $c = $_POST['email'];
     $d = $_POST['phone'];
-    $e = $_POST['passport'];
-    $f = $_POST['company'];
+    $f = $_POST['designation'];
     $g = $_POST['city'];
     $h = $_POST['address'];
     $i = $_POST['state'];
 
     // query
-    $sql = "UPDATE  facilitators SET fullname=?,email=?, phone=?, passport=?, company=?,city=?,`address`=?, `state`=? WHERE username = ?";
-    $q = $db->prepare($b);
-
-    $sql = "UPDATE  facilitators SET fullname=?,email=?, phone=?, passport=?, company=?,city=?,`address`=?, `state`=? WHERE username = ?";
-    $q = $db->prepare($b);
-
-    if ($q->execute(array($a, $c, $d, $e, $f, $g, $h, $i, $b))) {
+    if (isFacilitator()) {
+        $sql = "UPDATE  facilitators SET fullname=?,email=?, phone=?, designation=?,city=?,`address`=?, `state`=? WHERE username = ?";
+        $q = $db->prepare($sql);
+    }
+    if (isInstructor()) {
+        $sql = "UPDATE  instructor SET fullname=?,email=?, phone=?, designation=?,city=?,`address`=?, `state`=? WHERE username = ?";
+        $q = $db->prepare($sql);
+    }
+    if ($q->execute([$a, $c, $d, $f, $g, $h, $i, $b])) {
         $_SESSION['msg'] = 'Profile Details Updated successfully!';
-        header("location:viewFacilitator.php");
+        header("location:profile.php");
         exit;
     } else {
         $_SESSION['error_msg'] = 'Updated Failed';
-        header("location:viewFacilitator.php");
+        header("location:profile.php");
+        exit;
+    }
+}
+
+//Update public info 
+if ($form_id === "public_info") {
+    //Get data posted from form
+    $a = $_POST['bio'];
+    $b = $_POST['avatar'];
+
+    if (isFacilitator()) {
+        $sql = "UPDATE  facilitators SET fullname=?,email=?, phone=?, designation=?,city=?,`address`=?, `state`=? WHERE username = ?";
+        $q = $db->prepare($sql);
+    }
+    if (isInstructor()) {
+        $sql = "UPDATE  instructor SET fullname=?,email=?, phone=?, designation=?,city=?,`address`=?, `state`=? WHERE username = ?";
+        $q = $db->prepare($sql);
+    }
+
+    if ($q->execute([$a, $b])) {
+        $_SESSION['msg'] = 'Profile Details Updated successfully!';
+        header("location:profile.php");
+        exit;
+    } else {
+        $_SESSION['error_msg'] = 'Updated Failed';
+        header("location:profile.php");
         exit;
     }
 }

@@ -50,9 +50,15 @@ if (isset($_SESSION['msg'])) {
                             <tbody>
                                 <?php
                                 $no = 1;
-                                //Load Classes info
-                                $sth = $db->prepare("SELECT * FROM participants ORDER BY fullname ASC");
-                                $sth->execute();
+                                if (isFacilitator()) {
+                                    $sth = $db->prepare("SELECT * FROM participants WHERE company = ? ORDER BY fullname ASC");
+                                    $sth->execute([$company['company']]);
+                                }
+                                if (isInstructor()) {
+                                    $sth = $db->prepare("SELECT * FROM participants ORDER BY fullname ASC");
+                                    $sth->execute();
+                                }
+
                                 $count = $sth->rowCount();
                                 if ($count > 0) {
                                     while ($result = $sth->fetch()) {
