@@ -20,12 +20,12 @@ if (isset($_SESSION['error_msg'])) {
 ?>
 
 <script>
-    // HIDE MESSAGE AFTER 4 SECS
-    $(function() {
-        setTimeout(function() {
-            $(".alert").hide('slow');
-        }, 4000);
-    });
+// HIDE MESSAGE AFTER 4 SECS
+$(function() {
+    setTimeout(function() {
+        $(".alert").hide('slow');
+    }, 4000);
+});
 </script>
 
 <main class="content">
@@ -38,13 +38,16 @@ if (isset($_SESSION['error_msg'])) {
 
                 <div class="card">
                     <div class="list-group list-group-flush" role="tablist">
-                        <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#account" role="tab">
+                        <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#account"
+                            role="tab">
                             Account
                         </a>
-                        <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#password" role="tab">
+                        <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#password"
+                            role="tab">
                             Change Password
                         </a>
-                        <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#delete" role="tab">
+                        <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#delete"
+                            role="tab">
                             Delete account
                         </a>
                     </div>
@@ -72,33 +75,30 @@ if (isset($_SESSION['error_msg'])) {
                                 <h5 class="card-title mb-0">Public info</h5>
                             </div>
                             <div class="card-body">
-                                <form action="saveProfile.php" method="post">
-                                    <input type="hidden" name="form_id" value="public_info">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="mb-3">
-                                                <label class="form-label" for="inputUsername">Username</label>
-                                                <input type="text" class="form-control" value="<?php echo $username; ?>" readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label" for="inputUsername">Biography</label>
-                                                <textarea rows="2" class="form-control" id="inputBio" name="bio" placeholder="Tell something about yourself"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="text-center">
-                                                <img alt="Charles Hall" src="../static/img/avatars/avatar.jpg" class="rounded-circle img-responsive mt-2" width="128" height="128" />
-                                                <div class="mt-2">
-                                                    <span class="btn btn-primary">Upload</span>
-                                                </div>
-                                                <small>For best results, use an image at least 128px by 128px in .jpg format</small>
-                                            </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="inputUsername">Username</label>
+                                            <input type="text" class="form-control" value="<?php echo $username; ?>"
+                                                readonly>
                                         </div>
                                     </div>
-
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                </form>
-
+                                    <div class="col-md-6">
+                                        <form action="upload.php" class="uploadForm" enctype="multipart/form-data"
+                                            method="post">
+                                            <div id="targetLayer">No Image</div>
+                                            <!-- <div class="text-center"> -->
+                                            <!-- <img alt="Charles Hall" src="../static/img/avatars/avatar.jpg"
+                                                    class="rounded-circle img-responsive mt-2" width="128"
+                                                    height="128" /> -->
+                                            <div class="mt-2">
+                                                <input type='file' name='avatar' class="form-control" />
+                                                <input type="submit" value="Submit" class="btnSubmit" />
+                                            </div>
+                                            <!-- </div> -->
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -110,7 +110,8 @@ if (isset($_SESSION['error_msg'])) {
                             <div class="card-body">
                                 <form id='profile_info' method="post" action="saveProfile.php">
                                     <input type="hidden" class="form-control" name="form_id" value="profile_info">
-                                    <input type="hidden" class="form-control" name="username" value="<?php echo $username ?>">
+                                    <input type="hidden" class="form-control" name="username"
+                                        value="<?php echo $username ?>">
 
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
@@ -118,7 +119,8 @@ if (isset($_SESSION['error_msg'])) {
                                             <div class="input-group">
                                                 <input type="text" name="fullname" class="form-control" value="<?php if (isset($row['fullname'])) {
                                                                                                                     echo $row['fullname'];
-                                                                                                                } ?>" id="inputFirstName">
+                                                                                                                } ?>"
+                                                    id="inputFirstName">
                                             </div>
                                         </div>
                                         <div class="mb-3 col-md-6">
@@ -152,7 +154,8 @@ if (isset($_SESSION['error_msg'])) {
                                         <div class="mb-3 col-md-6">
                                             <label class=" form-label" for="company">Company</label>
                                             <div class="input-group">
-                                                <input type="text" name="company" readonly class="form-control" value="<?php if (isset($row['company'])) {
+                                                <input type="text" name="company" readonly class="form-control"
+                                                    value="<?php if (isset($row['company'])) {
                                                                                                                             echo $row['company'];
                                                                                                                         }; ?>">
                                             </div>
@@ -160,7 +163,8 @@ if (isset($_SESSION['error_msg'])) {
                                         <div class="mb-3 col-md-6">
                                             <label class=" form-label" for="designation">Designation</label>
                                             <div class="input-group">
-                                                <input type="text" name='designation' n class="form-control" value="<?php if (isset($row['designation'])) {
+                                                <input type="text" name='designation' n class="form-control"
+                                                    value="<?php if (isset($row['designation'])) {
                                                                                                                         echo $row['designation'];
                                                                                                                     }; ?>">
                                             </div>
@@ -205,7 +209,8 @@ if (isset($_SESSION['error_msg'])) {
                             <div class="card-body">
                                 <form method="post" id='password_change' action="saveProfile.php">
                                     <input type="hidden" class="form-control" name="form_id" value="password_change">
-                                    <input type="hidden" class="form-control" name="username" value="<?php echo $username ?>">
+                                    <input type="hidden" class="form-control" name="username"
+                                        value="<?php echo $username ?>">
 
                                     <div class="mb-3">
                                         <label class="form-label" for="inputPasswordCurrent">Current password</label>
@@ -216,7 +221,8 @@ if (isset($_SESSION['error_msg'])) {
                                     <div class="mb-3">
                                         <label class="form-label" for="inputPasswordNew">New password</label>
                                         <div class="input-group">
-                                            <input type="password" class="form-control" id='new_password' name="password">
+                                            <input type="password" class="form-control" id='new_password'
+                                                name="password">
                                         </div>
                                     </div>
                                     <div class="mb-3">
@@ -233,15 +239,18 @@ if (isset($_SESSION['error_msg'])) {
                     <div class="tab-pane fade" id="delete" role="tabpanel">
                         <div class="card">
                             <div class="card-header">
-                                <h5 style="color:red">Type your password to delete your account. This action is irreversible</h5>
+                                <h5 style="color:red">Type your password to delete your account. This action is
+                                    irreversible</h5>
                             </div>
                             <div class="card-body">
                                 <form method="post" id='delete_account' action="saveProfile.php">
                                     <input type="hidden" class="form-control" name="form_id" value="delete_account">
-                                    <input type="hidden" class="form-control" name="username" value="<?php echo $username ?>">
+                                    <input type="hidden" class="form-control" name="username"
+                                        value="<?php echo $username ?>">
 
                                     <div class="mb-3">
-                                        <label style="color:red" class="form-label" for="inputPasswordCurrent">Current password</label>
+                                        <label style="color:red" class="form-label" for="inputPasswordCurrent">Current
+                                            password</label>
                                         <div class="input-group">
                                             <input type="password" class="form-control" name="password">
                                         </div>
@@ -263,7 +272,8 @@ if (isset($_SESSION['error_msg'])) {
         <div class="row text-muted">
             <div class="col-6 text-start">
                 <p class="mb-0">
-                    <a href="https://github.com/hkwarui" class="text-muted"><strong>hkwarui</strong></a> &copy <?php echo date('Y') . "  "; ?>
+                    <a href="https://github.com/hkwarui" class="text-muted"><strong>hkwarui</strong></a> &copy
+                    <?php echo date('Y') . "  "; ?>
                 </p>
             </div>
             <div class="col-6 text-end">
@@ -273,94 +283,115 @@ if (isset($_SESSION['error_msg'])) {
 </footer>
 
 <script>
-    $(document).ready(function() {
+$(document).ready(function() {
 
-        // Validate password reset form
-        $('#password_change').validate({
-            rules: {
-                old_password: 'required',
-                password: {
-                    required: true,
-                    minlength: 6,
-                },
-                password_confirm: {
-                    equalTo: '#new_password',
-                    minlength: 6,
-                    required: true,
-                }
+    // Validate password reset form
+    $('#password_change').validate({
+        rules: {
+            old_password: 'required',
+            password: {
+                required: true,
+                minlength: 6,
             },
-            errorElement: 'span',
-            errorPlacement: function(error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.input-group').append(error);
-            },
-            highlight: function(element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function(element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            },
-            submitHandler: function(form) {
-                form.submit();
+            password_confirm: {
+                equalTo: '#new_password',
+                minlength: 6,
+                required: true,
             }
-        })
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.input-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    })
 
-        //Validate  delete account form
+    //Validate  delete account form
 
-        $('#delete_account').validate({
-            rules: {
-                password: 'required',
-            },
-            errorElement: 'span',
-            errorPlacement: function(error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.input-group').append(error);
-            },
-            highlight: function(element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function(element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            },
-            submitHandler: function(form) {
-                form.submit();
-            }
-        })
+    $('#delete_account').validate({
+        rules: {
+            password: 'required',
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.input-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    })
 
-        //Validate  profile info form
+    //Validate  profile info form
 
-        $('#profile_info').validate({
-            rules: {
-                fullname: 'required',
-                email: {
-                    email: true,
-                    required: true
-                },
-                phone: {
-                    required: true,
-                    digits: true,
-                    minlength: 10,
-                    maxlength: 13
-                },
-                company: 'required',
-                designation: 'required'
+    $('#profile_info').validate({
+        rules: {
+            fullname: 'required',
+            email: {
+                email: true,
+                required: true
             },
-            errorElement: 'span',
-            errorPlacement: function(error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.input-group').append(error);
+            phone: {
+                required: true,
+                digits: true,
+                minlength: 10,
+                maxlength: 13
             },
-            highlight: function(element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
+            company: 'required',
+            designation: 'required'
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.input-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    })
+
+    // Upload  profile pic
+    $('.uploadForm').on('submit', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: 'upload.php',
+            data: new FormData(this),
+            type: 'post',
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                console.log(data)
+                $('#targetLayer').html(data)
             },
-            unhighlight: function(element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            },
-            submitHandler: function(form) {
-                form.submit();
+            error: function(res) {
+                console.log(res.responseText)
             }
         })
     })
+})
 </script>
 
 </div>
