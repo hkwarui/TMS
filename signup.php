@@ -11,7 +11,7 @@ include_once("login.php");
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
     <meta name="author" content="AdminKit">
-    <meta name="keywords" content="Tangla, Gardens, Farm, admin, Poulty, Farming, Transport, greenhouse ">
+    <meta name="keywords" content="Training managment ,TMS">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="static/fontawesome-free/css/all.min.css">
     <link rel="shortcut icon" href="static/img/icons/favicon.png" />

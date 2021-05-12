@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 21, 2021 at 02:12 PM
+-- Generation Time: May 12, 2021 at 10:14 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -51,7 +51,13 @@ INSERT INTO `class_records` (`id`, `courseId`, `cohortId`, `startDate`, `endDate
 (6, 'SS-4', 'Cohort-017/2021', '2021-04-19 18:40:06', NULL, NULL, NULL, '555555'),
 (7, 'SS-4', 'Cohort-017/2021', '2021-04-19 23:40:15', NULL, NULL, NULL, '28582027'),
 (8, 'SS-1', 'Cohort-020/2021', '2021-04-20 00:23:28', NULL, NULL, NULL, '999999'),
-(9, 'SS-1', 'Cohort-020/2021', '2021-04-20 00:26:38', NULL, NULL, NULL, '78896544');
+(9, 'SS-1', 'Cohort-020/2021', '2021-04-20 00:26:38', NULL, NULL, NULL, '78896544'),
+(10, 'SS-5', 'Cohort-05/2021', '2021-04-29 16:09:34', NULL, NULL, NULL, '28582027'),
+(11, 'SS-3', 'Cohort-024/2021', '2021-05-04 09:40:04', NULL, NULL, NULL, '789654123'),
+(12, 'SS-13', 'Cohort-025/2021', '2021-05-04 21:32:39', NULL, NULL, NULL, '2456987'),
+(13, 'SS-1', 'Cohort-013/2021', '2021-05-04 21:47:52', NULL, NULL, NULL, '789654123'),
+(14, 'SS-4', 'Cohort-017/2021', '2021-05-05 10:11:49', NULL, NULL, NULL, '28582027'),
+(15, 'SS-7', 'Cohort-012/2021', '2021-05-05 11:04:00', NULL, NULL, NULL, '789654123');
 
 -- --------------------------------------------------------
 
@@ -74,19 +80,22 @@ CREATE TABLE `cohorts` (
 
 INSERT INTO `cohorts` (`id`, `courseId`, `cohortId`, `startTime`, `venue`, `status`) VALUES
 (1, 'SS-2', 'Cohort-01/2021', '13:40', 'online', 'scheduled'),
-(3, 'SS-3', 'Cohort-03/2021', '04:52', 'Online', 'inProgress'),
-(5, 'SS-5', 'Cohort-05/2021', '14:02', 'Online', 'cancelled'),
+(3, 'SS-3', 'Cohort-03/2021', '04:52', 'Online', 'cancelled'),
+(5, 'SS-5', 'Cohort-05/2021', '14:02', 'Online', 'done'),
 (6, 'SS-2', 'Cohort-06/2021', '11:31', 'online', 'scheduled'),
-(7, 'SS-3', 'Cohort-07/2021', '11:33', 'Online ', 'inProgress'),
-(10, 'SS-9', 'Cohort-010/2021', '16:14', 'Online', 'scheduled'),
+(7, 'SS-3', 'Cohort-07/2021', '11:33', 'Online ', 'cancelled'),
+(10, 'SS-9', 'Cohort-010/2021', '16:14', 'Online', 'inProgress'),
 (11, 'SS-6', 'Cohort-011/2021', '12:08', 'Online', 'done'),
 (12, 'SS-7', 'Cohort-012/2021', '00:13', 'Online', 'scheduled'),
 (15, 'SS-1', 'Cohort-013/2021', '15:00', 'online', 'cancelled'),
 (16, 'SS-10', 'Cohort-016/2021', '16:30', 'conference ', 'scheduled'),
 (17, 'SS-4', 'Cohort-017/2021', '02:28', '8998898', 'inProgress'),
-(18, 'SS-9', 'Cohort-018/2021', '21:00', 'Virtual Conference', 'scheduled'),
+(18, 'SS-9', 'Cohort-018/2021', '21:00', 'Virtual Conference', 'inProgress'),
 (19, 'SS-4', 'Cohort-019/2021', '16:55', 'Online', 'inProgress'),
-(22, 'SS-1', 'Cohort-020/2021', '00:22', 'LLLLLL', 'cancelled');
+(22, 'SS-1', 'Cohort-020/2021', '00:22', 'LLLLLL', 'cancelled'),
+(23, 'SS-13', 'Cohort-023/2021', '07:07', 'Online', 'done'),
+(24, 'SS-3', 'Cohort-024/2021', '07:07', 'D-hall', 'cancelled'),
+(25, 'SS-13', 'Cohort-025/2021', '19:08', 'oooooojujjoo', 'done');
 
 -- --------------------------------------------------------
 
@@ -118,7 +127,7 @@ INSERT INTO `courses` (`id`, `courseName`, `courseId`, `validity`, `duration`, `
 (8, 'Basic PrograminG', 'SS-8', '3', '10', '500', 'Henry warui'),
 (9, 'Music Player', 'SS-9', '5', '3', '0', 'Jesus '),
 (12, 'Hdhdh', 'SS-10', '456987', '10', '1025', 'kinyua'),
-(13, 'KSKSKSK', 'SS-13', '8', '3', '0', 'LDDLDLLDLDL');
+(13, 'Life Skills', 'SS-13', '4', '3', '0', 'Martin Waweru');
 
 -- --------------------------------------------------------
 
@@ -132,16 +141,54 @@ CREATE TABLE `facilitators` (
   `username` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
   `company` varchar(200) NOT NULL,
+  `designation` varchar(200) DEFAULT NULL,
   `passport` varchar(200) NOT NULL,
-  `phone` varchar(200) NOT NULL
+  `phone` varchar(200) NOT NULL,
+  `city` varchar(200) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `state` varchar(200) DEFAULT NULL,
+  `bio` varchar(500) DEFAULT NULL,
+  `avatar` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `facilitators`
 --
 
-INSERT INTO `facilitators` (`id`, `fullname`, `username`, `email`, `company`, `passport`, `phone`) VALUES
-(26, 'dfddf', 'fdfdfd', 'dfdfdf@gmail', 'kiwi johnson', '28546982', '7896541223');
+INSERT INTO `facilitators` (`id`, `fullname`, `username`, `email`, `company`, `designation`, `passport`, `phone`, `city`, `address`, `state`, `bio`, `avatar`) VALUES
+(26, 'dfddf', 'fdfdfd', 'dfdfdf@gmail', 'kiwi johnson', NULL, '28546982', '7896541223', NULL, NULL, NULL, NULL, NULL),
+(28, 'mama mamito', 'mama', 'mma@gmail.com', 'mamam sita ltd', 'Software develeper', '28582027', '0713498554', NULL, NULL, NULL, NULL, NULL),
+(29, 'normal user', 'user', 'user@gmail.com', 'sharp technology', 'software engineer', '28582027', '0713498554', 'Donholm', '10306', 'Donholm', 'lslls', 'lslslsl'),
+(30, 'peter wambua', 'Peter', 'peter@gmail.com', 'honeywell', 'Hr Admin', '456987523', '0789563214', 'Utawala', '1236', 'Kenya', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `instructor`
+--
+
+CREATE TABLE `instructor` (
+  `id` int(11) NOT NULL,
+  `fullname` varchar(200) NOT NULL,
+  `username` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `company` varchar(200) NOT NULL,
+  `designation` varchar(200) DEFAULT NULL,
+  `passport` varchar(200) NOT NULL,
+  `phone` varchar(200) NOT NULL,
+  `city` varchar(200) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `state` varchar(200) DEFAULT NULL,
+  `bio` varchar(200) DEFAULT NULL,
+  `avatar` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `instructor`
+--
+
+INSERT INTO `instructor` (`id`, `fullname`, `username`, `email`, `company`, `designation`, `passport`, `phone`, `city`, `address`, `state`, `bio`, `avatar`) VALUES
+(1, 'Administrator', 'admin', 'admin@gmail.com', 'tms', 'IT Instructor', '28582027', '0713498554', 'Donholm', 'vumilia', 'Donholm', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -170,106 +217,30 @@ CREATE TABLE `participants` (
 INSERT INTO `participants` (`id`, `fullname`, `email`, `phone`, `passport`, `company`, `designation`, `perfomance`, `completion`, `courseId`, `cohortId`) VALUES
 (1, 'erere', 'fgfgf@gfgf', '77777999999', '55555', 'kkkkk', 'kkkkkk', NULL, 'incomplete', 'pppp', 'ppp'),
 (2, 'henry warui', 'warui.gmail@com', '0713498554', '28582027', 'sharp technology', 'software developer', NULL, 'incomplete', 'SS-0002', 'Cohort-01/2021'),
-(3, 'john doe', 'warui@gmail.com', '2858202778', '285202', 'llll', 'llll', NULL, 'incomplete', '78', 'Cohort-05/2021'),
+(3, 'john doe', 'warui@gmail.com', '2858202778', '285202', 'llll', 'llll', 'fail', 'completed', '78', 'Cohort-05/2021'),
 (4, 'henry warui', 'henry@gmail.com', '0745698745', '28596378', 'sharp technology', 'software  ', 'pass', 'completed', 'SS-3', 'Cohort-03/2021'),
-(5, 'Kamenya', 'Kamenya@gmail.com', '0745698745', '845698712', 'point housing ', 'engineer', NULL, 'incomplete', 'SS-5', 'Cohort-05/2021'),
-(6, 'venessa Dee', 'dee@gmail.com', '0714896542', '28528024', 'penipila', 'accountant', NULL, 'completed', 'SS-1', 'Cohort-013/2021'),
+(5, 'Kamenya', 'Kamenya@gmail.com', '0745698745', '845698712', 'point housing ', 'engineer', 'pass', 'completed', 'SS-5', 'Cohort-05/2021'),
+(6, 'venessa Dee', 'dee@gmail.com', '0714896542', '28528024', 'penipila', 'accountant', 'fail', 'completed', 'SS-1', 'Cohort-013/2021'),
 (7, 'kdkdk', 'kkkk@fg', '12364789365', '2857200012', 'favour technology', 'kskksks', NULL, 'incomplete', 'SS-9', 'Cohort-010/2021'),
 (8, 'kdkdk', 'kkkk@fg', '12364789365', '2857200012', 'favour technology', 'kskksks', 'pass', 'completed', 'SS-7', 'Cohort-012/2021'),
 (9, 'henry warui', 'henry@gmail.com', '02123654789', '2136548', 'Insect Technologies', 'COO', 'pass', 'completed', 'SS-3', 'Cohort-03/2021'),
 (10, 'daisy simiyu', 'simiyu@gmail.com', '0745986321', '123654', 'tena solutions', 'cleaner', 'pass', 'completed', 'SS-3', 'Cohort-03/2021'),
 (11, 'ffggga', 'FIGA@gmail.com', '7896541223', '2385496545', 'riga js', 'ppppfp', 'pass', 'completed', 'SS-4', 'Cohort-017/2021'),
 (12, 'ffggga', 'FIGA@gmail.com', '7896541223', '2385496545', 'riga js', 'ppppfp', 'fail', 'completed', 'SS-4', 'Cohort-017/2021'),
-(13, 'henry warui', 'warui.henry@gmail.com', '0713498554', '28582027', 'sharp technology', 'software engineer', NULL, 'incomplete', 'SS-5', 'Cohort-05/2021'),
+(13, 'henry warui', 'warui.henry@gmail.com', '0713498554', '28582027', 'sharp technology', 'software engineer', 'pass', 'completed', 'SS-5', 'Cohort-05/2021'),
 (14, 'kdkdkk', 'kkkk@gmailcom', '0713498555', '2858200', 'kkkk', 'kkkk', 'fail', 'completed', 'SS-3', 'Cohort-03/2021'),
 (15, 'llslll', 'james@gmail.com', '07145698796', '555555', 'lowan joy', 'manager', 'fail', 'completed', 'SS-3', 'Cohort-03/2021'),
 (16, 'llslll', 'llll@gmail.com', '5555555555', '555555', 'kskksk', 'kkkk', 'fail', 'completed', 'SS-3', 'Cohort-03/2021'),
 (17, 'ldll', 'lll@ll', '54545455555', '555555', '5555', '55555', 'fail', 'completed', 'SS-4', 'Cohort-017/2021'),
 (18, 'ksksksk', 'kkkdk@kdkkd', '78965412366', '28582027', 'kskkksksksk', 'kksksks', 'fail', 'completed', 'SS-4', 'Cohort-017/2021'),
 (19, 'JQJJWJ', 'JJJJ@jjjj', '788999999999', '999999', '9ppppp', 'pppp', 'fail', 'completed', 'SS-1', 'Cohort-020/2021'),
-(20, 'ppppppppppp', 'pppp@pppppp', '04569875647', '78896544', '8llsllslLLLllllllllllllllllllll', '8899887', 'pass', 'completed', 'SS-1', 'Cohort-020/2021');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `permissions`
---
-
-CREATE TABLE `permissions` (
-  `perm_id` int(11) NOT NULL,
-  `perm_mod` varchar(5) NOT NULL,
-  `perm_desc` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `permissions`
---
-
-INSERT INTO `permissions` (`perm_id`, `perm_mod`, `perm_desc`) VALUES
-(1, 'INV', 'Access Inventory'),
-(1, 'USR', 'Access users'),
-(2, 'INV', 'Create Inventory'),
-(2, 'USR', 'Create new users'),
-(3, 'INV', 'Update Inventory'),
-(3, 'USR', 'Update users'),
-(4, 'INV', 'Delete Inventory'),
-(4, 'USR', 'Delete users');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `roles`
---
-
-CREATE TABLE `roles` (
-  `role_id` int(11) NOT NULL,
-  `role_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `roles`
---
-
-INSERT INTO `roles` (`role_id`, `role_name`) VALUES
-(1, 'Administrator'),
-(2, 'Power User'),
-(3, 'User');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `roles_permissions`
---
-
-CREATE TABLE `roles_permissions` (
-  `role_id` int(11) NOT NULL,
-  `perm_mod` varchar(5) NOT NULL,
-  `perm_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `roles_permissions`
---
-
-INSERT INTO `roles_permissions` (`role_id`, `perm_mod`, `perm_id`) VALUES
-(1, 'USR', 1),
-(1, 'USR', 2),
-(1, 'USR', 3),
-(1, 'USR', 4),
-(2, 'INV', 1),
-(2, 'INV', 2),
-(2, 'INV', 3),
-(2, 'INV', 4),
-(2, 'PRD', 1),
-(2, 'PRD', 2),
-(2, 'PRD', 3),
-(2, 'PRD', 4),
-(2, 'USR', 1),
-(2, 'USR', 2),
-(2, 'USR', 3),
-(2, 'USR', 4),
-(3, 'INV', 1),
-(3, 'PRD', 1);
+(20, 'ppppppppppp', 'pppp@pppppp', '04569875647', '78896544', '8llsllslLLLllllllllllllllllllll', '8899887', 'pass', 'completed', 'SS-1', 'Cohort-020/2021'),
+(21, 'llll', 'kkkk@mail.com', '0748569845', '28582027', 'kenya airports authority', 'software engineer', 'fail', 'completed', 'SS-5', 'Cohort-05/2021'),
+(22, 'james wakama ', 'wakama@gmail.com', '07896542189', '789654123', 'sharp technology', 'cleaner', 'pass', 'completed', 'SS-3', 'Cohort-024/2021'),
+(23, 'iiiiiiiiiiiiii', 'oooooo@gmmmil', '07134985455', '2456987', 'ooooo', 'oooo', NULL, 'completed', 'SS-13', 'Cohort-025/2021'),
+(24, 'ppppp', 'oooooo@gmmmil', '0745698745', '789654123', 'ooooo', 'ppppfp', NULL, 'incomplete', 'SS-1', 'Cohort-013/2021'),
+(25, 'kimotho', 'warui.henry@gmail.com', '0745698745', '28582027', 'sharp technology', 'llllll', 'pass', 'completed', 'SS-4', 'Cohort-017/2021'),
+(26, 'mercy wambui', 'wambui@gmail.com', '0789654123', '789654123', 'honeywell', 'cashier', NULL, 'incomplete', 'SS-7', 'Cohort-012/2021');
 
 -- --------------------------------------------------------
 
@@ -292,21 +263,15 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `name`, `password`, `role_id`, `login_status`, `date_created`) VALUES
-(1, 'admin', 'system adminstrator ', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 1, '2021-03-09 10:31:58'),
 (2, 'poweruser', 'superuser admin', '9f643ae7f7d8c52af499b9d334498bd584eaf9f0', 2, 1, '2021-03-09 12:10:07'),
-(3, 'user', 'normal user', '12dea96fec20593566ab75692c9949596833adc9', 3, 1, '2021-03-17 23:28:04'),
-(4, 'henry', 'henry warui', '3eca10f30041813f045165784e24b5a950a6cc7e', 1, 1, '2021-04-01 14:09:28'),
-(5, 'llllllll', 'lllll', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-07 09:01:37'),
-(6, 'kinyua', 'henry kinyua', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-07 09:05:57'),
-(7, 'kinyua45', 'warui', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-07 09:47:32'),
+(3, 'user', 'normal user', '12dea96fec20593566ab75692c9949596833adc9', 2, 1, '2021-03-17 23:28:04'),
+(4, 'henry', 'henry warui', 'd318f44739dced66793b1a603028133a76ae680e', 1, 1, '2021-04-01 14:09:28'),
+(5, 'admin', 'Administrator', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 1, '2021-04-07 09:01:37'),
+(6, 'kinyua', 'henry kinyua', '3725e117dc7b4ecbedea71c00c217a15f9734a1a', 2, 1, '2021-04-07 09:05:57'),
 (8, 'kinyua4596', 'warui', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-07 09:51:11'),
-(9, 'jumak', 'jkkak', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-07 09:52:03'),
-(10, 'kkfkf', 'kkkkk', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-10 18:59:03'),
-(11, 'kkk', 'kkk', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-12 11:30:11'),
+(10, 'warui', 'kkkkk', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-10 18:59:03'),
 (12, 'tttttttttt', 'tttttttt', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-14 18:08:20'),
 (13, 'lslsll', 'llll', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-14 18:18:20'),
-(14, 'ppdpp', 'pppp', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-14 18:19:32'),
-(15, 'jjjjjj', 'kkkk', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-14 18:24:36'),
 (16, 'hhdhdhh', 'hdhdh', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-14 20:24:28'),
 (17, 'pppsososooO', 'llldldl', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-14 20:25:07'),
 (18, 'kfkkfkfkk', 'kkkkk', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-14 20:25:27'),
@@ -318,7 +283,9 @@ INSERT INTO `users` (`id`, `username`, `name`, `password`, `role_id`, `login_sta
 (24, 'kskkssk', 'kkkk', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-14 21:37:38'),
 (25, 'kkkkkkk', 'kdkdkk', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-14 21:43:37'),
 (26, 'fdfdfd', 'dfddf', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-15 02:30:36'),
-(27, 'pppppp', 'ppppp', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-15 17:54:57');
+(27, 'pppppp', 'ppppp', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-15 17:54:57'),
+(28, 'mama', 'mama mamito', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-04-23 00:23:13'),
+(29, 'Peter', 'peter wambua', 'd318f44739dced66793b1a603028133a76ae680e', 2, 1, '2021-05-05 11:00:50');
 
 --
 -- Indexes for dumped tables
@@ -352,29 +319,18 @@ ALTER TABLE `facilitators`
   ADD UNIQUE KEY `username` (`username`);
 
 --
+-- Indexes for table `instructor`
+--
+ALTER TABLE `instructor`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- Indexes for table `participants`
 --
 ALTER TABLE `participants`
   ADD PRIMARY KEY (`id`,`passport`);
-
---
--- Indexes for table `permissions`
---
-ALTER TABLE `permissions`
-  ADD PRIMARY KEY (`perm_id`,`perm_mod`);
-
---
--- Indexes for table `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`role_id`),
-  ADD UNIQUE KEY `role_name` (`role_name`);
-
---
--- Indexes for table `roles_permissions`
---
-ALTER TABLE `roles_permissions`
-  ADD PRIMARY KEY (`role_id`,`perm_mod`,`perm_id`);
 
 --
 -- Indexes for table `users`
@@ -391,13 +347,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `class_records`
 --
 ALTER TABLE `class_records`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `cohorts`
 --
 ALTER TABLE `cohorts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `courses`
@@ -409,25 +365,25 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `facilitators`
 --
 ALTER TABLE `facilitators`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `instructor`
+--
+ALTER TABLE `instructor`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `participants`
 --
 ALTER TABLE `participants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `roles`
---
-ALTER TABLE `roles`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
