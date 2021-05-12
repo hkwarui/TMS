@@ -15,10 +15,10 @@ if ($form_id === "addParticipant") {
     $e = $_POST['company'];
     $f = $_POST['designation'];
     $g = $_POST['course'];
-    $h = $_POST['cohort'];
+    $h = $_POST['classCode'];
 
-    $sql = "INSERT INTO participants (fullname,email,phone,passport,company, designation,courseId, cohortId) VALUES (:a,:b,:c,:d,:e,:f,:g,:h)";
-    $sql1 = "INSERT INTO class_records (stud_id, courseId, cohortId) VALUES (:d,:g,:h)";
+    $sql = "INSERT INTO participants (fullname,email,phone,passport,company, designation,courseId, classCode) VALUES (:a,:b,:c,:d,:e,:f,:g,:h)";
+    $sql1 = "INSERT INTO class_records (stud_id, courseId, classCode) VALUES (:d,:g,:h)";
 
     $q = $db->prepare($sql);
     $q1 = $db->prepare($sql1);

@@ -19,12 +19,12 @@ if (isset($_POST['courseId'])) {
 if (isset($_POST['partId'])) {
     $partId = $_POST['partId'];
 
-    $sth = $db->prepare("SELECT cohortId FROM cohorts WHERE courseId = ?");
+    $sth = $db->prepare("SELECT classCode FROM cohorts WHERE courseId = ?");
     $sth->execute([$partId]);;
     $result = [];
     // fetch an array
     while ($row = $sth->fetch()) {
-        $result[] = $row['cohortId'];
+        $result[] = $row['classCode'];
     };
     echo json_encode($result);
     exit;

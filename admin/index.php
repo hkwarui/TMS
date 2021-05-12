@@ -26,10 +26,21 @@ $sth->execute();
 $totCourses = $sth->fetchColumn();
 
 //Count participants 
-$sth =  $db->prepare('SELECT count(*) FROM participants');
-$sth->execute();
-$totParticipants = $sth->fetchColumn();
 
+if (isInstructor()) {
+    $sth =  $db->prepare('SELECT count(*) FROM participants');
+    $sth->execute();
+    $totParticipants = $sth->fetchColumn();
+}
+
+if (isFacilitator()) {
+    $sth =  $db->prepare('SELECT * FROM participants WHERE company = "$company"');
+    $sth->execute();
+    $totParticipants = $sth->rowCount();
+}
+
+
+//Count Instructors 
 $sth =  $db->prepare('SELECT count(*) FROM instructor');
 $sth->execute();
 $totInstructor = $sth->fetchColumn();

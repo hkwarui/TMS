@@ -86,7 +86,8 @@ if (isset($_GET['id'])) {
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Class Name</th>
+                                        <th scope="col">Class Code</th>
+                                        <th scope="col">Date</th>
                                         <th scope="col">Time</th>
                                         <th scope="col">Venue</th>
                                         <th scope="col">Action</th>
@@ -104,11 +105,12 @@ if (isset($_GET['id'])) {
                                     ?>
                                             <tr>
                                                 <th scope="row"><?php echo $no++; ?></th>
-                                                <td><?php echo $result['cohortId']; ?></td>
-                                                <td><?php echo $result['startTime']; ?></td>
+                                                <td><?php echo $result['classCode']; ?></td>
+                                                <td><?php echo date('d/m/Y', strtotime($result['date'])); ?></td>
+                                                <td><?php echo date('H:i', strtotime($result['startTime'])) . "Hrs"; ?></td>
                                                 <td><?php echo $result['venue']; ?></td>
                                                 <td>
-                                                    <a title="View" href="viewClass.php?id=<?php echo $result['cohortId'] ?>&cid=<?php echo $row['courseId'] ?>"><i class="align-middle me-1" data-feather="eye"></i></a>
+                                                    <a title="View" href="viewClass.php?id=<?php echo $result['classCode'] ?>&cid=<?php echo $row['courseId'] ?>"><i class="align-middle me-1" data-feather="eye"></i></a>
                                                     <?php if (isInstructor()) { ?>
                                                         <a title="Edit" href="editClass.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a>
                                                         <a onclick="return confirm('Please confirm deletion');" title="Delete" href="deleteClass.php?id=<?php echo $result['id']; ?>&&coz_id=<?php echo $result['courseId']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a>

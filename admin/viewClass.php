@@ -26,7 +26,7 @@ if (isset($_SESSION['error_msg'])) {
 if (isset($_GET['id'])) {
 
     $courseId = $_GET['cid'];
-    $cohortId = $_GET['id'];
+    $classCode = $_GET['id'];
     // Load courses info
 
     $stm = $db->prepare("SELECT * FROM courses WHERE courseId= ?");
@@ -35,8 +35,8 @@ if (isset($_GET['id'])) {
 
     //Load cohorts info
 
-    $stm1 = $db->prepare("SELECT * FROM cohorts WHERE cohortId= ?");
-    $stm1->execute([$cohortId]);
+    $stm1 = $db->prepare("SELECT * FROM cohorts WHERE classCode= ?");
+    $stm1->execute([$classCode]);
     $row1 = $stm1->fetch();
 }
 ?>
@@ -55,7 +55,7 @@ if (isset($_GET['id'])) {
 
         <div class="row">
             <div class="col-10">
-                <h1 class="h3 mb-3  float-right">Class: <?php echo $cohortId; ?></h1>
+                <h1 class="h3 mb-3  float-right">Class Code: <?php echo $classCode; ?></h1>
             </div>
             <div class="col-2">
                 <button class="btn btn-sm btn-primary float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
@@ -121,7 +121,7 @@ if (isset($_GET['id'])) {
                                     <?php } ?>
                                 </div>
                                 <div class="col-2">
-                                    <a href="addParticipant.php?cid=<?php echo $courseId ?>&&id=<?php echo $cohortId ?>"> <button class="btn btn-sm btn-primary" id="completed" type="submit"><i class="align-middle me-1" data-feather="plus"></i>Add</button></a>
+                                    <a href="addParticipant.php?cid=<?php echo $courseId ?>&&id=<?php echo $classCode ?>"> <button class="btn btn-sm btn-primary" id="completed" type="submit"><i class="align-middle me-1" data-feather="plus"></i>Add</button></a>
                                 </div>
                             </div>
                         </div>
@@ -145,12 +145,12 @@ if (isset($_GET['id'])) {
                                         <?php
                                         $no = 1;
                                         if (isInstructor()) {
-                                            $sth = $db->prepare("SELECT * FROM participants WHERE cohortId = ?");
-                                            $sth->execute([$cohortId]);
+                                            $sth = $db->prepare("SELECT * FROM participants WHERE classCode = ?");
+                                            $sth->execute([$classCode]);
                                         }
                                         if (isFacilitator()) {
-                                            $sth = $db->prepare("SELECT * FROM participants WHERE cohortId = ? AND company = ?");
-                                            $sth->execute([$cohortId, $company['company']]);
+                                            $sth = $db->prepare("SELECT * FROM participants WHERE classCode = ? AND company = ?");
+                                            $sth->execute([$classCode, $company['company']]);
                                         }
                                         $count = $sth->rowCount();
                                         if ($count > 0) {

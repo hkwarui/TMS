@@ -9,14 +9,15 @@ $form_id = $_POST['form_id'];
 if ($form_id === "sheduleClass") {
     //Get data posted from course for
     $a = $_POST['course'];
-    $b = $_POST['cohort'];
+    $b = $_POST['classCode'];
     $c = $_POST['startTime'];
     $d = $_POST['venue'];
+    $e = $_POST['date'];
 
     // query
-    $sql = "INSERT INTO cohorts (courseId, cohortId, startTime, venue) VALUES (:a,:b,:c,:d)";
+    $sql = "INSERT INTO cohorts (courseId, classCode, startTime, venue, `date`) VALUES (:a,:b,:c,:d,:e)";
     $q = $db->prepare($sql);
-    $q->execute(array(':a' => $a, ':b' => $b, ':c' => $c, ':d' => $d));
+    $q->execute(array(':a' => $a, ':b' => $b, ':c' => $c, ':d' => $d, ':e' => $e));
 
     $_SESSION['msg'] = 'New Cohort Added Successfully !';
     header("location:viewCourse.php?id=" . $a);
@@ -30,12 +31,13 @@ if ($form_id === "editClass") {
     $b = $_POST['venue'];
     $c = $_POST['id'];
     $d = $_POST['course'];
+    $e = $_POST['date'];
 
     // query
-    $sql = "UPDATE cohorts  SET startTime = ?, venue= ? WHERE id= ?";
+    $sql = "UPDATE cohorts  SET startTime = ?, venue= ?,`date`=? WHERE id= ?";
     $q = $db->prepare($sql);
-    if ($q->execute([$a, $b, $c])) {
-        $_SESSION['msg'] = 'Cohort Updated Successfully !';
+    if ($q->execute([$a, $b, $c, $e])) {
+        $_SESSION['msg'] = 'Class Updated Successfully !';
         header("location:viewCourse.php?id=" . $d);
         exit;
     } else {

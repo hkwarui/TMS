@@ -2,10 +2,10 @@
 include_once('../includes/header.php');
 require_once '../includes/db_config.php';
 
-//check if values of course and cohort are set
+//check if values of course and classCode are set
 if (isset($_GET['cid']) &&  isset($_GET['id'])) {
     $courseId = $_GET['cid'];
-    $cohortId = $_GET['id'];
+    $classCode = $_GET['id'];
     $q = $db->prepare("SELECT courseName FROM courses WHERE courseId =?");
     $q->execute([$courseId]);
     $coz = $q->fetch();
@@ -126,9 +126,9 @@ if (isset($_SESSION['error_msg'])) {
                                     <div class="mb-2">
                                         <label class="form-label"><b>Select Class</b></label>
                                         <div class="input-group">
-                                            <select class="form-control" id="cohort" name="cohort">
+                                            <select class="form-control" id="classCode" name="classCode">
                                                 <?php if ($courseId) { ?>
-                                                    <option value="<?php echo $cohortId ?>" readonly><?php echo $cohortId ?></option>
+                                                    <option value="<?php echo $classCode ?>" readonly><?php echo $classCode ?></option>
                                                 <?php } else { ?>
                                                     <option value="">Select a class</option>
                                                 <?php } ?>
@@ -185,15 +185,15 @@ if (isset($_SESSION['error_msg'])) {
                 success: function(data) {
                     console.log(data)
                     if (data.length) {
-                        $("#cohort option").remove();
+                        $("#classCode option").remove();
                         for (var i = 0; i < data.length; i++) {
-                            $('#cohort').append('<option value="' + data[i] + '">' + data[i] + '</option>');
+                            $('#classCode').append('<option value="' + data[i] + '">' + data[i] + '</option>');
                         }
                     }
 
                     if (!data.length) {
-                        $("#cohort option").remove();
-                        $('#cohort').append('<option value=""> No scheduled class. </option>');
+                        $("#classCode option").remove();
+                        $('#classCode').append('<option value=""> No scheduled class. </option>');
                     }
                 },
                 error: function(data) {
@@ -225,7 +225,7 @@ if (isset($_SESSION['error_msg'])) {
                 company: 'required',
                 designation: 'required',
                 course: 'required',
-                cohort: 'required'
+                classCode: 'required'
             },
 
 

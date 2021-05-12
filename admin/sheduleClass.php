@@ -64,15 +64,15 @@ if (isset($_SESSION['error_msg'])) {
                                         </div>
                                     </div>
                                     <div class="mb-2">
-                                        <label class="form-label"><b>Start Time</b></label>
+                                        <label class="form-label"><b>Date </b></label>
                                         <div class="input-group">
-                                            <input type='time' class="form-control" name="startTime">
+                                            <input type='date' class="form-control" name="date">
                                         </div>
                                     </div>
                                     <div class="mb-2">
-                                        <label class="form-label"><b>Venue</b></label>
+                                        <label class="form-label"><b>time</b></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="venue" placeholder="e.g Online ">
+                                            <input type='time' class="form-control" name="startTime">
                                         </div>
                                     </div>
                                 </div>
@@ -85,9 +85,15 @@ if (isset($_SESSION['error_msg'])) {
                                 ?>
                                 <div class="col-12 col-lg-4">
                                     <div class="mb-2">
-                                        <label class="form-label"><b>Cohort</b></label>
+                                        <label class="form-label"><b>Venue</b></label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="cohort" value="<?php echo "Cohort-0" . $cohortId . "/" . date('Y') ?>" placeholder="e.g Cohort01/2021" readonly>
+                                            <input type="text" class="form-control" name="venue" placeholder="e.g Online ">
+                                        </div>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="form-label"><b>Class Code</b></label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="classCode" value="<?php echo  $cohortId . "/" . date('Y') ?>" placeholder="e.g Cohort01/2021" readonly>
                                         </div>
                                     </div>
                                     <div class="mb-2">

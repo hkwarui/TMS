@@ -63,6 +63,12 @@ if (isset($_SESSION['error_msg'])) {
                                 <div class="col-12 col-lg-1"></div>
                                 <div class="col-12 col-lg-4">
                                     <div class="mb-2">
+                                        <label class="form-label"><b>Date</b></label>
+                                        <div class="input-group">
+                                            <input type='time' value="<?php echo $row['date'] ?>" class="form-control" name="startTime">
+                                        </div>
+                                    </div>
+                                    <div class="mb-2">
                                         <label class="form-label"><b>Start Time</b></label>
                                         <div class="input-group">
                                             <input type='time' value="<?php echo $row['startTime'] ?>" class="form-control" name="startTime">
