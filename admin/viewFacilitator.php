@@ -100,7 +100,7 @@ if (isset($_SESSION['error_msg'])) {
         <div class="row text-muted">
             <div class="col-6 text-start">
                 <p class="mb-0">
-                    <a href="https://github.com/hkwarui" class="text-muted"><strong>hkwarui</strong></a> &copy <?php echo date('Y') . "  "; ?>
+                    <a href="https://github.com/hkwarui" class="text-muted"><strong>MartinW</strong></a> &copy <?php echo date('Y') . "  "; ?>
                 </p>
             </div>
             <div class="col-6 text-end">

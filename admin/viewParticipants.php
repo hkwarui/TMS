@@ -71,7 +71,8 @@ if (isset($_SESSION['msg'])) {
                                             <td><?php echo $result['passport']; ?></td>
                                             <td><?php echo ucwords($result['company']); ?></td>
                                             <td><?php echo ucwords($result['designation']); ?></td>
-                                            <td> <a title="Edit" href="editParticipants.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a><a onclick="return confirm('Please confirm deletion');" title="Delete" href="deleteCourse.php?id=<?php echo $row['id']; ?>?coz_id=<?php echo $row['courseId']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a> </td>
+                                            <td> 
+                                            <a title="View" href="view.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="eye"></i></a><a title="Edit" href="editParticipants.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a> </td>
                                         </tr>
                                     <?php }
                                 }
@@ -95,7 +96,7 @@ if (isset($_SESSION['msg'])) {
         <div class="row text-muted">
             <div class="col-6 text-start">
                 <p class="mb-0">
-                    <a href="https://github.com/hkwarui" class="text-muted"><strong>hkwarui</strong></a> &copy <?php echo date('Y') . "  "; ?>
+                    <a href="https://github.com/hkwarui" class="text-muted"><strong>MartinW</strong></a> &copy <?php echo date('Y') . "  "; ?>
                 </p>
             </div>
             <div class="col-6 text-end">

@@ -207,7 +207,7 @@ if (isset($_GET['id'])) {
         <div class="row text-muted">
             <div class="col-6 text-start">
                 <p class="mb-0">
-                    <a href="https://github.com/hkwarui" class="text-muted"><strong>hkwarui</strong></a> &copy <?php echo date('Y') . "  "; ?>
+                    <a href="https://github.com/hkwarui" class="text-muted"><strong>MartinW</strong></a> &copy <?php echo date('Y') . "  "; ?>
                 </p>
             </div>
             <div class="col-6 text-end">
@@ -218,7 +218,7 @@ if (isset($_GET['id'])) {
 <script>
     $(document).ready(function() {
 
-        // mark class in progress
+        // mark class in progress / done / cancelled
         $('#inProgress, #done ,#cancelled').on('click', function() {
             var status = $(this).attr('id');
             var courseId = $('#courseId').val()
@@ -360,6 +360,9 @@ if (isset($_GET['id'])) {
         $('#checkAll').click(function() {
             $('input:checkbox').prop('checked', this.checked);
         });
+
+        //data table
+        $('#myTable').dataTable({})
     })
 </script>
 </div>

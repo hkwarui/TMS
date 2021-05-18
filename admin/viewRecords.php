@@ -1,5 +1,5 @@
 <?php
-include_once('../includes/header.php');
+include_once '../includes/header.php';
 require_once '../includes/db_config.php';
 
 //DISPLAY SUCCESS MESSAGE IF ANY
@@ -20,10 +20,10 @@ if (isset($_SESSION['error_msg'])) {
 
 if (isset($_GET['id'])) {
 
-    // Load courses info
-    $courseId = $_GET['id'];
-    $stm = $db->prepare("SELECT * FROM courses WHERE courseId= ?");
-    $stm->execute([$courseId]);
+    // Load participant info
+    $partId = $_GET['id'];
+    $stm = $db->prepare("SELECT * FROM  participants WHERE  id= ?");
+    $stm->execute([$partId]);
     $row = $stm->fetch();
 }
 ?>
@@ -41,7 +41,7 @@ if (isset($_GET['id'])) {
     <div class="container-fluid p-0">
         <div class="row">
             <div class="col-10">
-                <h1 class="h3 mb-3  float-right"><?php echo $row['courseId'] . ": " . $row['courseName'] ?>
+                <h1 class="h3 mb-3  float-right"><?php echo ucfirst($row['fullname']); ?>
             </div>
             <div class="col-2">
                 <button class="btn btn-sm btn-primary float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
@@ -52,21 +52,21 @@ if (isset($_GET['id'])) {
             <div class="col-12">
                 <div class="card">
                     <div class="card-header ">
-                        <h5 class="card-title  mb-0">Course Details</h5>
+                        <h5 class="card-title  mb-0">Participants  Details</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 col-lg-3">
-                                <span><i class="align-middle me-1" data-feather="clock"></i> <?php echo $row['duration'] ?> Hours To complete the Course.</span>
+                                <span><i class="align-middle me-1" data-feather="at-sign"></i> <?php echo $row['email'] ?></span>
                             </div>
                             <div class="col-12 col-lg-3">
-                                <span><i class="align-middle me-1" data-feather="user-check"></i> Taught by <?php echo ucwords($row['instructor']) ?></span>
+                                <span><i class="align-middle me-1" data-feather="user-check"></i><?php echo ucwords($row['passport']) ?></span>
                             </div>
                             <div class="col-12 col-lg-2">
-                                <span><i class="align-middle me-1" data-feather="activity"></i> Valid for <?php echo $row['validity'] ?> Years.</span>
+                                <span><i class="align-middle me-1" data-feather="home"></i> <?php echo $row['company'] ?></span>
                             </div>
                             <div class="col-12 col-lg-2">
-                                <span><i class="align-middle me-1" data-feather="shopping-cart"></i>Cost: <?php echo  $row['cost'] != 0 ? " Ksh. " . $row['cost']  :  " Free"; ?> </span>
+                                <span><i class="align-middle me-1" data-feather="user"></i><?php echo  $row['designation']; ?> </span>
                             </div>
                             <div class="col-12 col-lg-2">
                                 <?php if (isInstructor()) { ?>
@@ -79,44 +79,48 @@ if (isset($_GET['id'])) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Sheduled Classes </h5>
+                            <h5 class="card-title mb-0">Records</h5>
                         </div>
                         <div class="card-body">
                             <table class="table table-hover table-sm" id="myTable">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Class Code</th>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Time</th>
+                                        <th scope="col">Course</th>
+                                        <th scope="col">class Code</th>
+                                        <th scope="col">Start Date</th>
                                         <th scope="col">Venue</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col">perfomance</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     $no = 1;
                                     //Load Classes info
-                                    $sth = $db->prepare("SELECT * FROM cohorts WHERE courseId = ?");
-                                    $sth->execute([$courseId]);
+                                    $sth = $db->prepare("SELECT * FROM class_records  WHERE stud_id = ?");
+                                    $sth->execute([$row['passport']]);
                                     $count = $sth->rowCount();
                                     if ($count > 0) {
                                         while ($result = $sth->fetch()) {
-                                    ?>
+                                       ?>
                                             <tr>
                                                 <th scope="row"><?php echo $no++; ?></th>
+                                                <td><?php echo $result['courseId']; ?></td>
                                                 <td><?php echo $result['classCode']; ?></td>
-                                                <td><?php echo date('d/m/Y', strtotime($result['date'])); ?></td>
-                                                <td><?php echo date('H:i', strtotime($result['startTime'])) . "Hrs"; ?></td>
+                                                <td><?php echo date('d/m/Y', strtotime($result['startDate'])); ?></td>
                                                 <td><?php echo $result['venue']; ?></td>
                                                 <td>
-                                                    <a title="View" href="viewClass.php?id=<?php echo $result['classCode'] ?>&cid=<?php echo $row['courseId'] ?>"><i class="align-middle me-1" data-feather="eye"></i></a>
-                                                    <?php if (isInstructor()) { ?>
-                                                        <a title="Edit" href="editClass.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a>
-                                                        <a onclick="return confirm('Please confirm deletion');" title="Delete" href="deleteClass.php?id=<?php echo $result['id']; ?>&&coz_id=<?php echo $result['courseId']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a>
-                                                    <?php } ?>
-                                                </td>
-                                            </tr>
+                                                <?php if (!$result['result']) {
+                                                            echo "-------";
+                                                        };
+                                                        if ($result['result'] == 'fail') { ?>
+                                                            <span class='badge bg-danger'> <?php echo ucwords($result['result']); ?> </span>
+                                                        <?php  };
+                                                        if ($result['result'] == 'pass') { ?>
+                                                            <span class='badge bg-success'><?php echo ucwords($result['result']); ?> </span>
+                                                        <?php }; ?>
+                                                        </td>
+                                                                                            </tr>
                                         <?php }
                                     }
                                     if ($count <= 0) { ?>
