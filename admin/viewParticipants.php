@@ -71,8 +71,9 @@ if (isset($_SESSION['msg'])) {
                                             <td><?php echo $result['passport']; ?></td>
                                             <td><?php echo ucwords($result['company']); ?></td>
                                             <td><?php echo ucwords($result['designation']); ?></td>
-                                            <td> 
-                                            <a title="View" href="view.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="eye"></i></a><a title="Edit" href="editParticipants.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a> </td>
+                                            <td>
+                                                <a title="View" href="viewRecords.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="eye"></i></a><a title="Edit" href="editParticipants.php?id=<?php echo $result['id'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a>
+                                            </td>
                                         </tr>
                                     <?php }
                                 }

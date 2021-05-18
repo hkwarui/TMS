@@ -52,7 +52,7 @@ if (isset($_GET['id'])) {
             <div class="col-12">
                 <div class="card">
                     <div class="card-header ">
-                        <h5 class="card-title  mb-0">Participants  Details</h5>
+                        <h5 class="card-title  mb-0">Participants Details</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -60,18 +60,13 @@ if (isset($_GET['id'])) {
                                 <span><i class="align-middle me-1" data-feather="at-sign"></i> <?php echo $row['email'] ?></span>
                             </div>
                             <div class="col-12 col-lg-3">
-                                <span><i class="align-middle me-1" data-feather="user-check"></i><?php echo ucwords($row['passport']) ?></span>
+                                <span><i class="align-middle me-1" data-feather="credit-card"></i> <?php echo ucwords($row['passport']) ?></span>
                             </div>
-                            <div class="col-12 col-lg-2">
+                            <div class="col-12 col-lg-3">
                                 <span><i class="align-middle me-1" data-feather="home"></i> <?php echo $row['company'] ?></span>
                             </div>
-                            <div class="col-12 col-lg-2">
+                            <div class="col-12 col-lg-3">
                                 <span><i class="align-middle me-1" data-feather="user"></i><?php echo  $row['designation']; ?> </span>
-                            </div>
-                            <div class="col-12 col-lg-2">
-                                <?php if (isInstructor()) { ?>
-                                    <span> <a title="Edit" href="editCourse.php?id=<?php echo $row['courseId'] ?>"><i class="align-middle me-1" data-feather="edit-2"></i></a><a onclick="return confirm('Please confirm deletion');" title="Delete" href="deleteCourse.php?id=<?php echo $row['id']; ?>?coz_id=<?php echo $row['courseId']; ?>"><i class="align-middle me-1" data-feather="trash-2"></i></a> </span>
-                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -102,7 +97,7 @@ if (isset($_GET['id'])) {
                                     $count = $sth->rowCount();
                                     if ($count > 0) {
                                         while ($result = $sth->fetch()) {
-                                       ?>
+                                    ?>
                                             <tr>
                                                 <th scope="row"><?php echo $no++; ?></th>
                                                 <td><?php echo $result['courseId']; ?></td>
@@ -110,22 +105,22 @@ if (isset($_GET['id'])) {
                                                 <td><?php echo date('d/m/Y', strtotime($result['startDate'])); ?></td>
                                                 <td><?php echo $result['venue']; ?></td>
                                                 <td>
-                                                <?php if (!$result['result']) {
-                                                            echo "-------";
-                                                        };
-                                                        if ($result['result'] == 'fail') { ?>
-                                                            <span class='badge bg-danger'> <?php echo ucwords($result['result']); ?> </span>
-                                                        <?php  };
-                                                        if ($result['result'] == 'pass') { ?>
-                                                            <span class='badge bg-success'><?php echo ucwords($result['result']); ?> </span>
-                                                        <?php }; ?>
-                                                        </td>
-                                                                                            </tr>
+                                                    <?php if (!$result['result']) {
+                                                        echo "-------";
+                                                    };
+                                                    if ($result['result'] == 'fail') { ?>
+                                                        <span class='badge bg-danger'> <?php echo ucwords($result['result']); ?> </span>
+                                                    <?php  };
+                                                    if ($result['result'] == 'pass') { ?>
+                                                        <span class='badge bg-success'><?php echo ucwords($result['result']); ?> </span>
+                                                    <?php }; ?>
+                                                </td>
+                                            </tr>
                                         <?php }
                                     }
                                     if ($count <= 0) { ?>
                                         <tr>
-                                            <td colspan="5"> No Scheduled classes in this Course ! </td>
+                                            <td colspan="6"> No Records </td>
                                         </tr>
                                     <?php   } ?>
                                 </tbody>
