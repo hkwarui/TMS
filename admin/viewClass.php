@@ -55,10 +55,10 @@ if (isset($_GET['id'])) {
 
         <div class="row">
             <div class="col-10">
-                <h1 class="h3 mb-3  float-right">Class Code: <?php echo $classCode; ?></h1>
+                <h1 class="mb-3  float-right">Class Code: <?php echo $classCode; ?></h1>
             </div>
             <div class="col-2">
-                <button class="btn btn-sm btn-primary float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
+                <button class="btn btn btn-info float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
             </div>
         </div>
 
@@ -66,33 +66,33 @@ if (isset($_GET['id'])) {
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title  mb-0"><?php echo $row['courseId'] . "  " . $row['courseName'] ?></h5>
+                        <h3 class="card-title  mb-0"><strong><?php echo $row['courseId'] . " " . $row['courseName'] ?></strong></h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 col-lg-2">
-                                <span><i class="align-middle me-1" data-feather="clock"></i> <?php echo $row1['startTime'] ?> Hrs.</span>
+                                <span><i class="align-middle me-1 feather-lg" data-feather="clock"></i> <?php echo date('d/m/Y', strtotime($row1['date'])) . "  " . $row1['startTime'] ?> Hrs.</span>
                             </div>
                             <div class="col-12 col-lg-2">
-                                <span><i class="align-middle me-1" data-feather="user-check"></i> Taught by <?php echo ucwords($row['instructor']) ?></span>
+                                <span><i class="align-middle me-1 feather-lg" data-feather="user-check"></i> Taught by <?php echo ucwords($row['instructor']) ?></span>
                             </div>
                             <div class="col-12 col-lg-2">
-                                <span><i class="align-middle me-1" data-feather="flag"></i> <?php if ($row1['status'] === 'scheduled') {
-                                                                                                echo "<span class='badge bg-secondary'>" . ucwords($row1['status']) . "</span>";
-                                                                                            }
-                                                                                            if ($row1['status'] === 'inProgress') {
-                                                                                                echo "<span class='badge bg-info'>" . $row1['status'] . "</span>";
-                                                                                            }
-                                                                                            if ($row1['status'] === 'cancelled') {
-                                                                                                echo "<span class='badge bg-danger'>" . ucwords($row1['status']) . "</span>";
-                                                                                            }
-                                                                                            if ($row1['status'] === 'done') {
-                                                                                                echo "<span class='badge bg-success'>" . ucwords($row1['status']) . "</span>";
-                                                                                            }
-                                                                                            ?>
+                                <span><i class="align-middle me-1 feather-lg" data-feather="flag"></i> <?php if ($row1['status'] === 'scheduled') {
+                                                                                                            echo "<span class='badge bg-secondary'>" . ucwords($row1['status']) . "</span>";
+                                                                                                        }
+                                                                                                        if ($row1['status'] === 'inProgress') {
+                                                                                                            echo "<span class='badge bg-info'>" . $row1['status'] . "</span>";
+                                                                                                        }
+                                                                                                        if ($row1['status'] === 'cancelled') {
+                                                                                                            echo "<span class='badge bg-danger'>" . ucwords($row1['status']) . "</span>";
+                                                                                                        }
+                                                                                                        if ($row1['status'] === 'done') {
+                                                                                                            echo "<span class='badge bg-success'>" . ucwords($row1['status']) . "</span>";
+                                                                                                        }
+                                                                                                        ?>
                             </div>
                             <div class="col-12 col-lg-2">
-                                <span><i class="align-middle me-1" data-feather="home"></i> <?php echo $row1['venue'] ?> </span>
+                                <span><i class="align-middle me-1 feather-lg" data-feather="home"></i> <?php echo ucwords($row1['venue']); ?> </span>
                             </div>
                             <div class="col-12 col-lg-4">
                                 <?php if (isInstructor()) {  ?>
@@ -109,8 +109,8 @@ if (isset($_GET['id'])) {
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-6">
-                                    <h5 class="card-title mb-0">Participants Record</h5>
+                                <div class="col-4">
+                                    <h3 class="card-title mb-0"><strong> Participants Record </strong></h3>
                                 </div>
                                 <div class="col-4">
                                     <?php if (isInstructor()) { ?>
@@ -120,8 +120,9 @@ if (isset($_GET['id'])) {
                                         <button class="btn btn-sm btn-primary" id="fail" type="submit"><i class="align-middle me-1" data-feather="user-x"></i>Fail</button>
                                     <?php } ?>
                                 </div>
-                                <div class="col-2">
-                                    <a href="addParticipant.php?cid=<?php echo $courseId ?>&&id=<?php echo $classCode ?>"> <button class="btn btn-sm btn-primary" id="completed" type="submit"><i class="align-middle me-1" data-feather="plus"></i>Add</button></a>
+                                <div class="col-4">
+                                    <a href="addParticipant.php?cid=<?php echo $courseId ?>&&id=<?php echo $classCode ?>"> <button class="btn btn-sm btn-info" id="add" type="submit"><i class="align-middle me-1" data-feather="user-plus"></i>Add</button></a>
+                                    <button class="btn btn-sm btn-danger" id="remove" type="submit"><i class="align-middle me-1" data-feather="user-minus"></i>Remove</button>
                                 </div>
                             </div>
                         </div>
@@ -352,6 +353,42 @@ if (isset($_GET['id'])) {
                 },
                 error: function(data) {
                     console.log(data.responseText);
+                }
+            })
+        })
+
+        //Remove participant in a class
+        $('#remove').click(function() {
+            console.log("Button remove clicked");
+            var selectedUser = new Array();
+            $('.myTable input[type="checkbox"]:checked').each(function() {
+                selectedUser.push(this.value);
+            })
+            console.log(selectedUser);
+
+            $.ajax({
+                url: 'deleteRecord.php',
+                method: 'post',
+                data: {
+                    data: selectedUser
+                },
+                success: function(res) {
+                    console.log(res);
+                    if (res == 1) {
+                        $('#alertMsg').html('<div class="alert alert-success ml-5 p-1">Performance status updated</div>');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 4000);
+                    }
+                    if (res == 2) {
+                        $('#alertMsg').html('<div class="alert alert-danger ml-5 p-1">No checkbox selected</div>');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 4000)
+                    }
+                },
+                error: function(data) {
+                    console.log(data.responseText)
                 }
             })
         })

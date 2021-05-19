@@ -42,10 +42,10 @@ if (isset($_SESSION['error_msg'])) {
 
         <div class="row">
             <div class="col-10">
-                <h1 class="h3 mb-3">Add Participant</h1>
+                <h1 class="mb-3">Add Participant</h1>
             </div>
             <div class="col-2">
-                <button class="btn btn-sm btn-primary float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
+                <button class="btn btn-info float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
             </div>
         </div>
 
@@ -138,7 +138,7 @@ if (isset($_SESSION['error_msg'])) {
                                 </div>
                                 <div class="col-12 col-lg-1"></div>
                                 <div class="text-center mt-4">
-                                    <button type="submit" class="btn btn-lg btn-primary"> Add </button>
+                                    <button type="submit" class="btn btn-lg btn-primary"> Add Participant </button>
                                 </div>
                             </div>
                         </form>

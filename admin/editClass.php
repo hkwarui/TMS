@@ -41,10 +41,10 @@ if (isset($_SESSION['error_msg'])) {
     <div class="container-fluid p-0">
         <div class="row">
             <div class="col-10">
-                <h1 class="h3 mb-3">Edit class</h1>
+                <h1 class="mb-3">Edit class</h1>
             </div>
             <div class="col-2">
-                <button class="btn btn-sm btn-primary float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
+                <button class="btn btn btn-info float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
             </div>
         </div>
 
@@ -65,7 +65,7 @@ if (isset($_SESSION['error_msg'])) {
                                     <div class="mb-2">
                                         <label class="form-label"><b>Date</b></label>
                                         <div class="input-group">
-                                            <input type='time' value="<?php echo $row['date'] ?>" class="form-control" name="startTime">
+                                            <input type='date' value="<?php echo $row['date'] ?>" class="form-control" name="startTime">
                                         </div>
                                     </div>
                                     <div class="mb-2">
@@ -77,7 +77,7 @@ if (isset($_SESSION['error_msg'])) {
                                     <div class="mb-2">
                                         <label class="form-label"><b>Venue</b></label>
                                         <div class="input-group">
-                                            <input type="text" value="<?php echo $row['venue'] ?>" class="form-control" name="venue">
+                                            <input type="text" value="<?php echo ucwords($row['venue']); ?>" class="form-control" name="venue">
                                         </div>
                                     </div>
                                 </div>

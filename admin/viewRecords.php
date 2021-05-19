@@ -41,10 +41,10 @@ if (isset($_GET['id'])) {
     <div class="container-fluid p-0">
         <div class="row">
             <div class="col-10">
-                <h1 class="h3 mb-3  float-right"><?php echo ucfirst($row['fullname']); ?>
+                <h1 class="mb-3  float-right"><?php echo ucwords($row['fullname']); ?>
             </div>
             <div class="col-2">
-                <button class="btn btn-sm btn-primary float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
+                <button class="btn btn btn-info float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
             </div>
         </div>
 
@@ -52,21 +52,21 @@ if (isset($_GET['id'])) {
             <div class="col-12">
                 <div class="card">
                     <div class="card-header ">
-                        <h5 class="card-title  mb-0">Participants Details</h5>
+                        <h3 class="card-title  mb-0"><strong> Details </strong></h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 col-lg-3">
-                                <span><i class="align-middle me-1" data-feather="at-sign"></i> <?php echo $row['email'] ?></span>
+                                <span><i class="align-middle me-1 feather-lg" data-feather="mail"></i> <?php echo $row['email'] ?></span>
                             </div>
                             <div class="col-12 col-lg-3">
-                                <span><i class="align-middle me-1" data-feather="credit-card"></i> <?php echo ucwords($row['passport']) ?></span>
+                                <span><i class="align-middle me-1 feather-lg" data-feather="credit-card"></i> <?php echo ucwords($row['passport']) ?></span>
                             </div>
                             <div class="col-12 col-lg-3">
-                                <span><i class="align-middle me-1" data-feather="home"></i> <?php echo $row['company'] ?></span>
+                                <span><i class="align-middle me-1 feather-lg" data-feather="home"></i> <?php echo $row['company'] ?></span>
                             </div>
                             <div class="col-12 col-lg-3">
-                                <span><i class="align-middle me-1" data-feather="user"></i><?php echo  $row['designation']; ?> </span>
+                                <span><i class="align-middle me-1 feather-lg" data-feather="user"></i><?php echo  $row['designation']; ?> </span>
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,7 @@ if (isset($_GET['id'])) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Records</h5>
+                            <h3 class="card-title mb-0"><strong> Records </strong></h3>
                         </div>
                         <div class="card-body">
                             <table class="table table-hover table-sm" id="myTable">
@@ -82,10 +82,10 @@ if (isset($_GET['id'])) {
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Course</th>
-                                        <th scope="col">class Code</th>
+                                        <th scope="col">Class Code</th>
                                         <th scope="col">Start Date</th>
                                         <th scope="col">Venue</th>
-                                        <th scope="col">perfomance</th>
+                                        <th scope="col">Perfomance</th>
                                     </tr>
                                 </thead>
                                 <tbody>

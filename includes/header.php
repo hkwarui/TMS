@@ -21,12 +21,21 @@ require_once "../admin/auth.php";
     <script src="../static/js/jquery.validate.min.js"></script>
     <script src="../static/js/app.js"></script>
 
+    <style>
+        .sidebar a,
+        i {
+            font-size: 20px;
+            font-weight: 20em;
+            color: #fff;
+        }
+    </style>
+
 <body>
     <div class="wrapper">
         <nav id="sidebar" class="sidebar">
             <div class="sidebar-content js-simplebar">
                 <a class="sidebar-brand" href="index.html">
-                    <h2 class="align-middle" style="color:#3275c7;">
+                    <h2 class="align-middle" style="color:#3275c7;font-size:250%">
                         <b> TMS<small>&reg;</small></b>
                     </h2>
                 </a>
@@ -40,12 +49,12 @@ require_once "../admin/auth.php";
                     ?>
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="index.php">
-                                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                                <i class="align-middle" data-feather="sliders" style="color: #fff;"></i> <span class="align-middle">Dashboard</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a href="#facilitator" data-bs-toggle="collapse" class="sidebar-link collapsed">
-                                <i class="align-middle" data-feather="users"></i> <span class="align-middle">Facilitator</span>
+                                <i class="align-middle" data-feather="users" style="color: #fff;"></i> <span class="align-middle">Facilitator</span>
                             </a>
                             <ul id="facilitator" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
                                 <li class="sidebar-item"><a class="sidebar-link" href="addFacilitator.php">Add Facilitator</a></li>
@@ -54,7 +63,7 @@ require_once "../admin/auth.php";
                         </li>
                         <li class="sidebar-item">
                             <a href="#course" data-bs-toggle="collapse" class="sidebar-link collapsed">
-                                <i class="align-middle" data-feather="book-open"></i> <span class="align-middle">Course</span>
+                                <i class="align-middle" data-feather="book-open" style="color: #fff;"></i> <span class="align-middle">Course</span>
                             </a>
                             <ul id="course" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
                                 <li class="sidebar-item"><a class="sidebar-link" href="addCourse.php">Add Course</a></li>
@@ -64,7 +73,7 @@ require_once "../admin/auth.php";
                         </li>
                         <li class="sidebar-item">
                             <a href="#participant" data-bs-toggle="collapse" class="sidebar-link collapsed">
-                                <i class="align-middle" data-feather="users"></i> <span class="align-middle">Participants</span>
+                                <i class="align-middle" data-feather="users" style="color: #fff;"></i> <span class="align-middle">Participants</span>
                             </a>
                             <ul id="participant" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
                                 <li class="sidebar-item"><a class="sidebar-link" href="addParticipant.php">Add Participant</a></li>
@@ -74,14 +83,14 @@ require_once "../admin/auth.php";
                     <?php }
                     if (isFacilitator()) {
                     ?>
-                        <li class="sidebar-item active">
+                        <li class="sidebar-item">
                             <a class="sidebar-link" href="index.php">
-                                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                                <i class="align-middle" data-feather="sliders" style="color: #fff;"></i> <span class="align-middle">Dashboard</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a href="#course" data-bs-toggle="collapse" class="sidebar-link collapsed">
-                                <i class="align-middle" data-feather="book-open"></i> <span class="align-middle">Course</span>
+                                <i class="align-middle" data-feather="book-open" style="color: #fff;"></i> <span class="align-middle">Course</span>
                             </a>
                             <ul id="course" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
                                 <li class="sidebar-item"><a class="sidebar-link" href="courses.php">view Courses</a></li>
@@ -89,7 +98,7 @@ require_once "../admin/auth.php";
                         </li>
                         <li class="sidebar-item">
                             <a href="#participant" data-bs-toggle="collapse" class="sidebar-link collapsed">
-                                <i class="align-middle" data-feather="users"></i> <span class="align-middle">Participants</span>
+                                <i class="align-middle" data-feather="users" style="color: #fff;"></i> <span class="align-middle">Participants</span>
                             </a>
                             <ul id="participant" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
                                 <li class="sidebar-item"><a class="sidebar-link" href="addParticipant.php">Add Participant</a></li>
@@ -111,7 +120,7 @@ require_once "../admin/auth.php";
                     <ul class="navbar-nav navbar-align">
                         <li class="nav-item dropdown">
                             <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                                <i class="align-middle" data-feather="settings"></i>
+                                <i class="align-middle feather-lg" data-feather="settings"></i>
                             </a>
 
                             <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">

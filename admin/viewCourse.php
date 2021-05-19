@@ -41,10 +41,10 @@ if (isset($_GET['id'])) {
     <div class="container-fluid p-0">
         <div class="row">
             <div class="col-10">
-                <h1 class="h3 mb-3  float-right"><?php echo $row['courseId'] . ": " . $row['courseName'] ?>
+                <h1 class="mb-3  float-right"><?php echo $row['courseId'] . ": " . $row['courseName'] ?>
             </div>
             <div class="col-2">
-                <button class="btn btn-sm btn-primary float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
+                <button class="btn btn btn-info float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
             </div>
         </div>
 
@@ -52,21 +52,21 @@ if (isset($_GET['id'])) {
             <div class="col-12">
                 <div class="card">
                     <div class="card-header ">
-                        <h5 class="card-title  mb-0">Course Details</h5>
+                        <h3 class="card-title  mb-0"><strong>Course Details</strong></h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 col-lg-3">
-                                <span><i class="align-middle me-1" data-feather="clock"></i> <?php echo $row['duration'] ?> Hours To complete the Course.</span>
+                                <span><i class="align-middle me-1 feather-lg" data-feather="clock"></i> <?php echo $row['duration'] ?> Hours To complete the Course.</span>
                             </div>
                             <div class="col-12 col-lg-3">
-                                <span><i class="align-middle me-1" data-feather="user-check"></i> Taught by <?php echo ucwords($row['instructor']) ?></span>
+                                <span><i class="align-middle me-1 feather-lg" data-feather="user-check"></i> Taught by <?php echo ucwords($row['instructor']) ?></span>
                             </div>
                             <div class="col-12 col-lg-2">
-                                <span><i class="align-middle me-1" data-feather="activity"></i> Valid for <?php echo $row['validity'] ?> Years.</span>
+                                <span><i class="align-middle me-1 feather-lg" data-feather="activity"></i> Valid for <?php echo $row['validity'] ?> Years.</span>
                             </div>
                             <div class="col-12 col-lg-2">
-                                <span><i class="align-middle me-1" data-feather="shopping-cart"></i>Cost: <?php echo  $row['cost'] != 0 ? " Ksh. " . $row['cost']  :  " Free"; ?> </span>
+                                <span><i class="align-middle me-1 feather-lg" data-feather="shopping-cart"></i> <?php echo  $row['cost'] != 0 ? " Ksh. " . $row['cost']  :  " Free"; ?> </span>
                             </div>
                             <div class="col-12 col-lg-2">
                                 <?php if (isInstructor()) { ?>
@@ -79,7 +79,7 @@ if (isset($_GET['id'])) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Sheduled Classes </h5>
+                            <h3 class="card-title mb-0"><strong>Scheduled Classes </strong> </h3>
                         </div>
                         <div class="card-body">
                             <table class="table table-hover table-sm" id="myTable">
@@ -121,7 +121,7 @@ if (isset($_GET['id'])) {
                                     }
                                     if ($count <= 0) { ?>
                                         <tr>
-                                            <td colspan="5"> No Scheduled classes in this Course ! </td>
+                                            <td colspan="6"> No Scheduled classes in this Course ! </td>
                                         </tr>
                                     <?php   } ?>
                                 </tbody>

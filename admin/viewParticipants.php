@@ -23,10 +23,10 @@ if (isset($_SESSION['msg'])) {
     <div class="container-fluid p-0">
         <div class="row">
             <div class="col-10">
-                <h1 class="h3 mb-3">Participants</h1>
+                <h1 class="mb-3">Participants</h1>
             </div>
             <div class="col-2">
-                <button class="btn btn-sm btn-primary float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
+                <button class="btn btn btn-info float-right" onclick="history.go(-1)"><i class="align-middle me-1" data-feather="arrow-left"></i>Back </button></h1>
             </div>
         </div>
 
@@ -79,7 +79,7 @@ if (isset($_SESSION['msg'])) {
                                 }
                                 if ($count <= 0) { ?>
                                     <tr>
-                                        <td colspan="5"><b> No Scheduled classes in this Course !</b> </td>
+                                        <td colspan="6"><b> No Scheduled classes in this Course !</b> </td>
                                     </tr>
                                 <?php   } ?>
                             </tbody>

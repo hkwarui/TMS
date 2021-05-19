@@ -26,7 +26,6 @@ $sth->execute();
 $totCourses = $sth->fetchColumn();
 
 //Count participants 
-
 if (isInstructor()) {
     $sth =  $db->prepare('SELECT count(*) FROM participants');
     $sth->execute();
@@ -51,43 +50,31 @@ $totInstructor = $sth->fetchColumn();
 
         <div class="row mb-2 mb-xl-3">
             <div class="col-auto d-none d-sm-block">
-                <h3><strong>Analytics</strong> Dashboard</h3>
+                <h1><strong>Analytics</strong> Dashboard</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title mb-4">Courses</h5>
-                        <h1 class="mt-1 mb-3"><?php echo $totCourses ?></h1>
-                        <!-- <div class="mb-1">
-                            <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-                            <span class="text-muted">Since last week</span>
-                        </div> -->
+                        <h4 class="card-title mb-4">Courses</h4>
+                        <h1 class="mt-1 mb-3"><strong><?php echo $totCourses ?></strong> </h1>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title mb-4">Participants</h5>
-                        <h1 class="mt-1 mb-3"><?php echo $totParticipants ?></h1>
-                        <!-- <div class="mb-1">
-                            <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-                            <span class="text-muted">Since last week</span>
-                        </div> -->
+                        <h4 class="card-title mb-4">Participants</h4>
+                        <h1 class="mt-1 mb-3"><strong> <?php echo $totParticipants ?></strong> </h1>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title mb-4">Instrutors</h5>
-                        <h1 class="mt-1 mb-3"><?php echo $totInstructor ?></h1>
-                        <!-- <div class="mb-1">
-                            <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-                            <span class="text-muted">Since last week</span>
-                        </div> -->
+                        <h4 class="card-title mb-4">Instrutors</h4>
+                        <h1 class="mt-1 mb-3"><strong><?php echo $totInstructor ?> </strong></h1>
                     </div>
                 </div>
             </div>
@@ -95,7 +82,7 @@ $totInstructor = $sth->fetchColumn();
                 <div class="card flex-fill">
                     <div class="card-header">
 
-                        <h5 class="card-title mb-0">Latest Courses</h5>
+                        <h3 class="card-title mb-0"><strong> Courses </strong></h3>
                     </div>
                     <table class="table table-sm table-hover my-0">
                         <thead>

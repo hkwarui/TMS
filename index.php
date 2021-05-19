@@ -50,7 +50,7 @@ include_once("login.php");
                                             <label class="form-label"><b>Username</b></label>
                                             <div class="input-group">
                                                 <div class="input-group-text bg-primary">
-                                                    <span class="fas fa-user" style="color:white"></span>
+                                                    <i class="feather" data-feather="user" style="color:white"></i>
                                                 </div>
                                                 <input class="form-control form-control-lg" type="text" id="username" name="username" required>
                                             </div>
@@ -59,22 +59,17 @@ include_once("login.php");
                                             <label class="form-label"><b>Password</b></label>
                                             <div class="input-group">
                                                 <div class="input-group-text bg-primary">
-                                                    <span class="fas fa-lock" style="color:white"></span>
+                                                    <i class="feather" data-feather="key" style="color:white"></i>
                                                 </div>
                                                 <input class="form-control form-control-lg" type="password" id="password" name="password" required>
                                             </div>
                                         </div>
                                         <div class="mb-2">
-                                            <small>
-                                                <a href="pages-reset-password.html">Forgot password?</a>
-                                            </small>
-                                            <small style="float:right"> <a href="signup.php">Don't have a account ? Signup</a></small>
                                         </div>
 
-                                        <div class="text-center mt-2">
-                                            <!-- <a href="index.html" class="btn btn-lg btn-primary">Sign in</a> -->
+                                        <div class="text-center mt-3">
                                             <button type="submit" name="login_user" class="btn btn-lg btn-primary">Sign
-                                                in</button>
+                                                In</button>
                                         </div>
                                     </form>
                                 </div>
