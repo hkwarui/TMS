@@ -128,7 +128,7 @@ if (isset($_GET['id'])) {
                         </div>
                         <div class="card-body">
                             <form method="post" action="editRecords.php" name="frmUser">
-                                <table class="table table-responsive table-hover table-sm">
+                                <table class="table table-hover table-sm" id="myTable">
                                     <thead>
                                         <tr>
                                             <th scope="col"><input type="checkbox" id="checkAll"> </th>
@@ -158,7 +158,6 @@ if (isset($_GET['id'])) {
                                             while ($result = $sth->fetch()) {
                                         ?>
                                                 <tr class="myTable">
-                                                    <!-- <th scope="row"><?php echo $no++; ?></th> -->
                                                     <td><input type="checkbox" name="users[]" value="<?php echo $result["id"]; ?>"></td>
                                                     <td><?php echo $result['fullname']; ?></td>
                                                     <td><?php echo $result['email']; ?></td>
@@ -399,7 +398,13 @@ if (isset($_GET['id'])) {
         });
 
         //data table
-        $('#myTable').dataTable({})
+        $('#myTable').dataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'excelHtml5',
+                'pdfHtml5'
+            ]
+        })
     })
 </script>
 </div>

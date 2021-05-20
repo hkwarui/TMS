@@ -19,7 +19,7 @@ if (isset($_SESSION['msg'])) {
     });
 </script>
 
-<main class="content">
+<main class="content" style="background-color: green;">
     <div class="container-fluid p-0">
         <div class="row">
             <div class="col-10">
@@ -110,7 +110,13 @@ if (isset($_SESSION['msg'])) {
 </div>
 <script>
     $(document).ready(function() {
-        $('#myTable').dataTable({})
+        $('#myTable').dataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'excelHtml5',
+                'pdfHtml5'
+            ]
+        })
     })
 </script>
 

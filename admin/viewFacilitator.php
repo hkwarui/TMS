@@ -113,7 +113,13 @@ if (isset($_SESSION['error_msg'])) {
 </div>
 <script>
     $(document).ready(function() {
-        $('#myTable').dataTable({})
+        $('#myTable').dataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'excelHtml5',
+                'pdfHtml5'
+            ]
+        })
     })
 </script>
 </body>
